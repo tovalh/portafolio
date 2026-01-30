@@ -2,17 +2,17 @@ import { Project, Skill, SocialLink } from './types';
 
 export const HERO_TEXT = {
     greeting: "Hola, soy Toval.",
-    role: "Backend Developer & Data Architect",
-    tagline: "Especialista en integridad de datos, optimización SQL y modernización de sistemas críticos.",
-    cta: "Ver Mis Soluciones"
+    role: "Full Stack Developer",
+    tagline: "Backend, bases de datos y sistemas que funcionan bajo presión.",
+    cta: "Ver proyectos"
 };
 
 export const ABOUT_TEXT = `
-  Soy un Desarrollador Full Stack con un enfoque profundo en el Backend y la Arquitectura de Software. 
-  Más allá de escribir código, diseño soluciones para problemas complejos: desde orquestar transacciones 
-  distribuidas en múltiples servidores hasta optimizar consultas en bases de datos masivas bajo la regla 
-  de los "2 segundos". Combino la disciplina de la arquitectura Microservicios (Java) con el pragmatismo 
-  de entornos de alto tráfico (PHP), transformando código legacy en sistemas modernos, escalables y seguros.
+Desarrollador Full Stack con foco en backend y arquitectura de datos. 
+Trabajo construyendo sistemas empresariales que manejan millones de registros 
+con tiempos de respuesta estrictos. Mi día a día incluye optimización SQL, 
+integraciones entre sistemas, y modernizar código legacy sin romper lo que funciona.
+Actualmente expandiendo mi stack hacia TypeScript y Node.js.
 `;
 
 export const PROJECTS: Project[] = [
@@ -43,16 +43,20 @@ export const PROJECTS: Project[] = [
 ];
 
 export const SKILLS: Skill[] = [
-    { name: 'Backend Logic & Architecture', level: 90, category: 'Backend' },
-    { name: 'SQL & DB Optimization', level: 95, category: 'Database' },
-    { name: 'PHP (Legacy to Modern)', level: 90, category: 'Language' },
-    { name: 'Java / Spring Boot', level: 80, category: 'Backend' },
-    { name: 'API REST & Security (JWT)', level: 85, category: 'Backend' },
-    { name: 'JavaScript/TypeScript', level: 70, category: 'Language' },
+    { name: 'PHP', level: 90, category: 'Backend' },
+    { name: 'MySQL', level: 90, category: 'Database' },
+    { name: 'SQL Optimization', level: 85, category: 'Database' },
+    { name: 'JavaScript', level: 80, category: 'Language' },
+    { name: 'REST APIs', level: 85, category: 'Backend' },
+    { name: 'Java', level: 70, category: 'Backend' },
+    { name: 'Spring Boot', level: 65, category: 'Backend' },
+    { name: 'PostgreSQL', level: 60, category: 'Database' },
+    { name: 'TypeScript', level: 40, category: 'Language' },
+    { name: 'Laravel', level: 50, category: 'Backend' },
 ];
 
 export const SOCIALS: SocialLink[] = [
-    { platform: "GitHub", url: "https://github.com/tu-usuario", icon: "github" },
-    { platform: "LinkedIn", url: "https://linkedin.com/in/tu-usuario", icon: "linkedin" },
+    { platform: "GitHub", url: "https://github.com/tovalh", icon: "github" },
+    { platform: "LinkedIn", url: "https://linkedin.com/in/cristobal-valladares", icon: "linkedin" },
     { platform: "Email", url: "crisvalladares98@gmail.com", icon: "mail" },
 ];

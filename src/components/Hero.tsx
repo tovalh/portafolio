@@ -13,7 +13,7 @@ export default function Hero() {
             </div>
 
             <div className="container mx-auto px-4 z-10 relative">
-                <div className="max-w-4xl mx-auto text-center">
+                <div className="mx-auto text-center">
                     <div className="inline-flex items-center px-3 py-1 mb-6 rounded-full border sky-50 border-slate-700 bg-slate-900/50 backdrop-blur-sm">
                         <Code2 size={16} className="text-accent mr-2" />
                         <span className="text-xs font-mono text-accent uppercase tracking-wider ">Disponible para nuevos proyectos</span>

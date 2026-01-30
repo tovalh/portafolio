@@ -34,7 +34,7 @@ export default function Header() {
                 <Terminal size={28} className="group-hover:text-cyan-400 transition-colors"/>
                 <span
                     className="font-bold text-xl text-white tracking-wider group-hover:text-cyan-400 transition-colors">
-                    CRISTOBAL.DEV
+                    TOVAL.DEV
                 </span>
             </a>
 

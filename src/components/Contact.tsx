@@ -5,7 +5,7 @@ export default function Contact() {
     return (
         <section id="contact" className="py-24 bg-darker relative border-t border-slate-800">
             <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div className="grid grid-cols-1 gap-16">
 
                     {/* Contacto Info */}
                     <div>
