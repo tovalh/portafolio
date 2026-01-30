@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Toval - Backend Developer & Data Architect
 
-## Getting Started
+Portafolio personal donde muestro mi trabajo como desarrollador especializado en backend, arquitectura de software y optimizacion de bases de datos.
 
-First, run the development server:
+## Sobre Mi
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Soy un Desarrollador Full Stack con enfoque profundo en Backend y Arquitectura de Software. Más alla de escribir código, diseño soluciones para problemas complejos: desde orquestar transacciones distribuidas en multiples servidores hasta optimizar consultas en bases de datos masivas bajo la regla de los "2 segundos".
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Combino la disciplina de la arquitectura Microservicios (Java) con el pragmatismo de entornos de alto tráfico (PHP), transformando código legacy en sistemas modernos, escalables y seguros.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Especialidades
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Backend Logic & Architecture
+- SQL & Optimización de Bases de Datos
+- PHP (Legacy a Moderno)
+- Java / Spring Boot
+- API REST & Seguridad (JWT)
+- JavaScript / TypeScript
 
-## Learn More
+## Proyectos Destacados
 
-To learn more about Next.js, take a look at the following resources:
+**Motor de Transacciones Distribuido**
+Sistema core para ERP Multi-Tenant con escritura simultanea en 5+ bases de datos y rollback atómico personalizado.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**API de Integracion Internacional**
+API RESTful segura con JWT para sincronización de facturación en tiempo real entre sistemas de Chile y España.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Arquitectura Microservicios Escolar**
+Sistema de gestión academica con 8 microservicios para evaluaciones y asistencia.
 
-## Deploy on Vercel
+## Contacto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Email: crisvalladares98@gmail.com
+- GitHub: github.com/tovalh
+- LinkedIn: linkedin.com/in/cristobal-valladares
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Stack del Sitio
+
+Este portafolio está construido con Next.js, React y TypeScript. Incluye una API Route para el formulario de contacto como demostración simple de las capacidades fullstack de Next.js.
