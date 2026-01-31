@@ -1,84 +1,117 @@
 'use client'
-import {useState, useEffect} from 'react'
-import {Menu, X, Terminal} from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { NAV_LINKS, HEADER_TEXT } from '../../constants';
 
-const navLinks = [
-    {name: 'Inicio', href: '#hero'},
-    {name: 'Proyectos', href: '#proyectos'},
-    {name: 'Habilidades', href: '#habilidades'},
-    {name: 'Contacto', href: '#contacto'},
-]
+interface Spark {
+    id: number;
+    x: number;
+    y: number;
+    angle: number;
+    speed: number;
+    color: string;
+    size: number;
+}
 
 export default function Header() {
-    const [isOpen, setIsOpen] = useState(false)
-    const [scrolled, setScrolled] = useState(false)
+    const [scrolled, setScrolled] = useState(false);
+    const [sparks, setSparks] = useState<Spark[]>([]);
+    const requestRef = useRef<number>(0);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50)
-        }
+            setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
-        window.addEventListener('scroll', handleScroll)
+    // Animation Loop for Sparks
+    useEffect(() => {
+        const animate = () => {
+            setSparks(prevSparks =>
+                prevSparks
+                    .map(spark => ({
+                        ...spark,
+                        x: spark.x + Math.cos(spark.angle) * spark.speed,
+                        y: spark.y + Math.sin(spark.angle) * spark.speed,
+                        speed: spark.speed * 0.95, // friction
+                        size: spark.size * 0.95 // fade out size
+                    }))
+                    .filter(spark => spark.size > 0.5)
+            );
+            requestRef.current = requestAnimationFrame(animate);
+        };
+        requestRef.current = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(requestRef.current);
+    }, []);
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
+    const triggerExplosion = (e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const colors = ['#FF6B35', '#4361EE', '#2EC4B6', '#FF5A5A'];
+
+        const newSparks: Spark[] = Array.from({ length: 12 }).map((_, i) => ({
+            id: Date.now() + i,
+            x: centerX,
+            y: centerY,
+            angle: (Math.PI * 2 * i) / 12,
+            speed: Math.random() * 4 + 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            size: Math.random() * 4 + 2
+        }));
+
+        setSparks(prev => [...prev, ...newSparks]);
+    };
 
     return (
-        <header
-            className={`flex justify-between items-center px-4 fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/90 backdrop-blur-md border-b border-slate-800 py-3' : 'bg-transparent py-5'}`}>
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-white/80 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent'}`}>
 
-            {/* Logo */}
-            <a href="#hero" className="flex items-center space-x-2 text-fuchsia-400 group">
-                <Terminal size={28} className="group-hover:text-cyan-400 transition-colors"/>
-                <span
-                    className="font-bold text-xl text-white tracking-wider group-hover:text-cyan-400 transition-colors">
-                    TOVAL.DEV
-                </span>
-            </a>
-
-            {/* Nav Desktop */}
-            <nav className="hidden md:flex items-center space-x-8">
-                {navLinks.map((link) => (
-                    <a
-                        key={link.name}
-                        href={link.href}
-                        className="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full"
-                    >
-                        {link.name}
-                    </a>
+            <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 60 }}>
+                {sparks.map(spark => (
+                    <div
+                        key={spark.id}
+                        className="absolute rounded-full"
+                        style={{
+                            left: spark.x,
+                            top: spark.y,
+                            width: spark.size,
+                            height: spark.size,
+                            backgroundColor: spark.color,
+                            transform: 'translate(-50%, -50%)',
+                        }}
+                    />
                 ))}
-                <a
-                    href="#contacto"
-                    className="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-full hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all transform hover:-translate-y-0.5"
-                >
-                    Contratar
-                </a>
-            </nav>
-
-            {/* Botón Hamburguesa */}
-            <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white">
-                {isOpen ? <X size={28}/> : <Menu size={28}/>}
-            </button>
-
-            {/* Menú Móvil */}
-            <div
-                className={`md:hidden absolute top-full left-0 w-full bg-gray-900 border-b border-slate-800 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="px-4 pt-2 pb-4 space-y-2 flex flex-col items-center">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            onClick={() => setIsOpen(false)}
-                            className="block px-3 py-2 text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800 rounded-md w-full text-center"
-                        >
-                            {link.name}
-                        </a>
-                    ))}
-                </div>
             </div>
 
-        </header>
-    )
+            <div className="max-w-6xl mx-auto px-6 flex justify-between items-center relative z-50">
+
+                {/* Logo */}
+                <a
+                    href="#"
+                    className="font-display font-bold text-2xl text-dark tracking-tighter hover:text-primary transition-colors cursor-pointer select-none"
+                    onMouseEnter={triggerExplosion}
+                >
+                    {HEADER_TEXT.logo}<span className="text-primary">.</span>
+                </a>
+
+                {/* Links */}
+                <div className="hidden md:flex gap-8 items-center">
+                    <a href="#about" className="text-dark font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[1].name}</a>
+                    <a href="#experience" className="text-dark font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[2].name}</a>
+                    <a href="#projects" className="text-dark font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[3].name}</a>
+                    <a href="#contact" className="px-5 py-2 bg-dark text-white rounded-full font-medium text-sm hover:bg-primary transition-colors shadow-lg hover:shadow-primary/30">
+                        {HEADER_TEXT.contactButton}
+                    </a>
+                </div>
+
+                {/* Mobile Menu Icon */}
+                <div className="md:hidden space-y-1.5 cursor-pointer group">
+                    <div className="w-6 h-0.5 bg-dark group-hover:bg-primary transition-colors"></div>
+                    <div className="w-4 h-0.5 bg-dark group-hover:bg-primary group-hover:w-6 transition-all"></div>
+                    <div className="w-6 h-0.5 bg-dark group-hover:bg-primary transition-colors"></div>
+                </div>
+
+            </div>
+        </nav> )
 }

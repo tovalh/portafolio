@@ -1,61 +1,61 @@
 import React from 'react';
-import { Mail, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Linkedin, Github, Coffee } from 'lucide-react';
+import { CONTACT_TEXT } from '../../constants';
 
 export default function Contact() {
     return (
-        <section id="contact" className="py-24 bg-darker relative border-t border-slate-800">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 gap-16">
+        <section id="contact" className="py-24 px-6 bg-transparent relative overflow-hidden">
 
-                    {/* Contacto Info */}
-                    <div>
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
-                            Hablemos
-                        </h2>
-                        <p className="text-slate-400 text-lg mb-10 max-w-md">
-                            ¿Tienes un proyecto en mente o simplemente quieres saludar? Mi inbox siempre está abierto.
-                        </p>
+            <div className="max-w-4xl mx-auto text-center relative z-10">
 
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-4 text-slate-300 group cursor-pointer">
-                                <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center border border-slate-800 group-hover:border-accent transition-colors">
-                                    <Mail size={24} className="group-hover:text-accent transition-colors" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-slate-500">Email</p>
-                                    <p className="text-lg font-medium">crisvalladares98@gmail.com</p>
-                                </div>
-                            </div>
+                <div className="inline-block p-4 rounded-full bg-primary/10 mb-6 animate-bounce">
+                    <Coffee className="w-8 h-8 text-primary" />
+                </div>
 
-                            <div className="flex items-center gap-4 text-slate-300 group cursor-pointer">
-                                <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center border border-slate-800 group-hover:border-fuchsia-500 transition-colors">
-                                    <MapPin size={24} className="group-hover:text-fuchsia-500 transition-colors" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-slate-500">Ubicación</p>
-                                    <p className="text-lg font-medium">Remote / Santiago, CL</p>
-                                </div>
-                            </div>
+                <h2 className="font-display text-4xl md:text-6xl font-bold text-dark mb-6">
+                    {CONTACT_TEXT.title} <br/> <span className="text-primary">{CONTACT_TEXT.titleHighlight}</span>
+                </h2>
+
+                <p className="text-xl text-dark/60 max-w-2xl mx-auto mb-12">
+                    {CONTACT_TEXT.description}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+
+                    <a href={CONTACT_TEXT.email.href} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-primary transition-all shadow-lg hover:shadow-primary/20 flex flex-col items-center">
+                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <Mail className="w-6 h-6 text-primary" />
                         </div>
+                        <h3 className="font-bold text-dark text-lg mb-1">{CONTACT_TEXT.email.title}</h3>
+                        <p className="text-sm text-gray-500">{CONTACT_TEXT.email.subtitle}</p>
+                    </a>
 
-                        <div className="mt-12 pt-8 border-t border-slate-800">
-                            <p className="text-sm text-slate-500 mb-4">Sígueme en redes</p>
-                            <div className="flex gap-4">
-                                <a href="https://github.com/tovalh" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-white hover:text-darker transition-all transform hover:-translate-y-1">
-                                    <Github size={20} />
-                                </a>
-                                <a href="https://www.linkedin.com/in/cristobal-valladares/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#0077b5] hover:text-white transition-all transform hover:-translate-y-1">
-                                    <Linkedin size={20} />
-                                </a>
-                                <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#1DA1F2] hover:text-white transition-all transform hover:-translate-y-1">
-                                    <Twitter size={20} />
-                                </a>
-                            </div>
+                    <a href={CONTACT_TEXT.linkedin.href} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-secondary transition-all shadow-lg hover:shadow-secondary/20 flex flex-col items-center">
+                        <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <Linkedin className="w-6 h-6 text-secondary" />
                         </div>
-                    </div>
+                        <h3 className="font-bold text-dark text-lg mb-1">{CONTACT_TEXT.linkedin.title}</h3>
+                        <div className="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full mt-1">
+                            {CONTACT_TEXT.linkedin.badge}
+                        </div>
+                    </a>
+
+                    <a href={CONTACT_TEXT.github.href} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-dark transition-all shadow-lg hover:shadow-gray-300 flex flex-col items-center">
+                        <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <Github className="w-6 h-6 text-dark" />
+                        </div>
+                        <h3 className="font-bold text-dark text-lg mb-1">{CONTACT_TEXT.github.title}</h3>
+                        <p className="text-sm text-gray-500">{CONTACT_TEXT.github.subtitle}</p>
+                    </a>
 
                 </div>
+
+                <div className="mt-20 pt-10 border-t border-gray-100 text-center text-gray-400 text-sm">
+                    <p>© {new Date().getFullYear()} {CONTACT_TEXT.footer.copyright}</p>
+                    <p className="mt-2 text-xs">{CONTACT_TEXT.footer.madeWith}</p>
+                </div>
+
             </div>
         </section>
     );
-};
+}
