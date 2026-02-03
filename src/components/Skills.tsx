@@ -52,10 +52,10 @@ function Card({ card }: { card: TechCard }) {
             bg: 'bg-accent/5'
         },
         learning: {
-            border: 'border-dark',
+            border: 'border-dark dark:border-white/50',
             shadow: 'shadow-dark/20 hover:shadow-dark/30',
-            text: 'text-dark',
-            bg: 'bg-dark/5'
+            text: 'text-dark dark:text-white',
+            bg: 'bg-dark/5 dark:bg-white/5'
         }
     };
 
@@ -63,7 +63,7 @@ function Card({ card }: { card: TechCard }) {
     const IconComponent = ICON_MAP[card.id];
 
     return (
-        <div className={`bg-white/70 backdrop-blur-md rounded-3xl p-6 border-2 ${style.border} ${style.shadow} shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col h-full`}>
+        <div className={`bg-white/70 dark:bg-white/10 backdrop-blur-md rounded-3xl p-6 border-2 ${style.border} ${style.shadow} shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col h-full`}>
 
             {/* Header */}
             <div className="flex justify-between items-start mb-4">
@@ -76,18 +76,18 @@ function Card({ card }: { card: TechCard }) {
                 </div>
             </div>
 
-            <h3 className="font-display font-bold text-xl text-dark mb-1">{card.name}</h3>
-            <p className="text-xs text-dark/50 font-bold uppercase mb-4 tracking-wide">{card.role}</p>
+            <h3 className="font-display font-bold text-xl text-dark dark:text-white mb-1">{card.name}</h3>
+            <p className="text-xs text-dark/50 dark:text-white/50 font-bold uppercase mb-4 tracking-wide">{card.role}</p>
 
             {/* Description with min-height for visual alignment */}
-            <p className="text-sm text-dark/80 font-medium font-sans leading-relaxed mb-6 min-h-[60px]">
+            <p className="text-sm text-dark/80 dark:text-white/80 font-medium font-sans leading-relaxed mb-6 min-h-[60px]">
                 {card.description}
             </p>
 
             {/* Metric: Experience */}
-            <div className="mt-auto pt-4 border-t border-gray-100/50">
+            <div className="mt-auto pt-4 border-t border-gray-100/50 dark:border-white/10">
                 <div className="flex justify-between items-end lg:flex-col lg:items-start lg:gap-1">
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{SKILLS_TEXT.experienceLabel}</span>
+                    <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{SKILLS_TEXT.experienceLabel}</span>
                     <span className={`font-mono font-bold text-base ${style.text}`}>
                         {card.experience}
                     </span>
@@ -102,13 +102,13 @@ function SecondaryPill({ id, name }: { id: string; name: string }) {
     const IconComponent = ICON_MAP[id];
 
     return (
-        <div className="group flex items-center gap-3 px-4 py-3 bg-white/60 backdrop-blur-sm border border-gray-200/60 rounded-xl hover:border-primary/30 hover:bg-white hover:shadow-md transition-all duration-300">
+        <div className="group flex items-center gap-3 px-4 py-3 bg-white/60 dark:bg-white/10 backdrop-blur-sm border border-gray-200/60 dark:border-white/20 rounded-xl hover:border-primary/30 hover:bg-white dark:hover:bg-white/20 hover:shadow-md transition-all duration-300">
             {IconComponent ? (
                 <IconComponent size={20} className="opacity-70 group-hover:opacity-100 transition-opacity" />
             ) : (
                 <span className="w-5 h-5 text-xs font-bold">{name.charAt(0)}</span>
             )}
-            <span className="text-sm font-medium text-dark/70 group-hover:text-dark transition-colors">{name}</span>
+            <span className="text-sm font-medium text-dark/70 dark:text-white/70 group-hover:text-dark dark:group-hover:text-white transition-colors">{name}</span>
         </div>
     );
 }
@@ -121,15 +121,15 @@ export default function Skills() {
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                     <div>
-                        <h2 className="font-display text-4xl font-bold text-dark mb-2">
+                        <h2 className="font-display text-4xl font-bold text-dark dark:text-white mb-2">
                             {SKILLS_TEXT.title}
                         </h2>
-                        <p className="text-dark/70 font-medium text-lg">
+                        <p className="text-dark/70 dark:text-white/70 font-medium text-lg">
                             {SKILLS_TEXT.subtitle}
                         </p>
                     </div>
                     <div className="hidden md:block text-right">
-                        <div className="inline-block bg-dark text-white px-4 py-2 rounded-lg font-mono text-sm transform -rotate-2 shadow-lg">
+                        <div className="inline-block bg-dark dark:bg-white/10 text-white px-4 py-2 rounded-lg font-mono text-sm transform -rotate-2 shadow-lg">
                             {SKILLS_TEXT.badge}
                         </div>
                     </div>
@@ -143,11 +143,11 @@ export default function Skills() {
                 </div>
 
                 {/* Divider */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-dark/10 to-transparent mb-12"></div>
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-dark/10 dark:via-white/10 to-transparent mb-12"></div>
 
                 {/* SECONDARY SECTION */}
                 <div className="flex flex-col items-center md:items-start">
-                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">
+                    <h3 className="text-sm font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-6">
                         {SKILLS_TEXT.secondaryTitle}
                     </h3>
 

@@ -99,10 +99,10 @@ export default function Projects() {
 
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <h2 className="font-display text-4xl md:text-5xl font-bold text-dark mb-4">
+                    <h2 className="font-display text-4xl md:text-5xl font-bold text-dark dark:text-white mb-4">
                         {PROJECTS_TEXT.title}
                     </h2>
-                    <p className="text-dark/60 max-w-2xl mx-auto">
+                    <p className="text-dark/60 dark:text-white/60 max-w-2xl mx-auto">
                         {PROJECTS_TEXT.subtitle} <span className="text-sm align-top text-primary">*</span>
                     </p>
                 </div>
@@ -113,13 +113,13 @@ export default function Projects() {
                     {/* Navigation Buttons (Desktop) */}
                     <button
                         onClick={prevSlide}
-                        className="absolute left-4 md:left-10 z-40 p-3 rounded-full bg-white/80 backdrop-blur-md shadow-lg border border-white/50 hover:bg-primary hover:text-white transition-all group hidden md:block"
+                        className="absolute left-4 md:left-10 z-40 p-3 rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/50 dark:border-white/20 hover:bg-primary hover:text-white transition-all group hidden md:block"
                     >
                         <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
                     </button>
                     <button
                         onClick={nextSlide}
-                        className="absolute right-4 md:right-10 z-40 p-3 rounded-full bg-white/80 backdrop-blur-md shadow-lg border border-white/50 hover:bg-primary hover:text-white transition-all group hidden md:block"
+                        className="absolute right-4 md:right-10 z-40 p-3 rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/50 dark:border-white/20 hover:bg-primary hover:text-white transition-all group hidden md:block"
                     >
                         <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -137,7 +137,7 @@ export default function Projects() {
                                 <div
                                     key={project.id}
                                     onClick={() => config.dist !== 0 && setSlide(index)}
-                                    className="absolute top-1/2 left-1/2 w-[85vw] md:w-[600px] h-auto min-h-[420px] bg-white/90 backdrop-blur-md rounded-3xl border-2 border-gray-100 shadow-2xl p-8 flex flex-col transition-all duration-500 ease-out cursor-pointer overflow-hidden"
+                                    className="absolute top-1/2 left-1/2 w-[85vw] md:w-[600px] h-auto min-h-[420px] bg-white/90 dark:bg-white/10 backdrop-blur-md rounded-3xl border-2 border-gray-100 dark:border-white/20 shadow-2xl p-8 flex flex-col transition-all duration-500 ease-out cursor-pointer overflow-hidden"
                                     style={{
                                         transform: `translate(-50%, -50%) translateX(${config.translateX}) scale(${config.scale})`,
                                         zIndex: config.zIndex,
@@ -153,7 +153,7 @@ export default function Projects() {
                                         </div>
 
                                         <div className="flex items-center gap-3">
-                                            <div className="px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-xs font-mono font-bold text-gray-500">
+                                            <div className="px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/20 text-xs font-mono font-bold text-gray-500 dark:text-gray-400">
                                                 {project.status.toUpperCase()}
                                             </div>
                                             <div className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${styles.statsBg} ${styles.statsText}`}>
@@ -164,16 +164,16 @@ export default function Projects() {
 
                                     {/* Main Content */}
                                     <div className="flex-grow">
-                                        <h3 className="text-2xl md:text-3xl font-display font-bold text-dark mb-4">
+                                        <h3 className="text-2xl md:text-3xl font-display font-bold text-dark dark:text-white mb-4">
                                             {project.title}
                                         </h3>
-                                        <p className="text-dark/70 leading-relaxed font-sans mb-6 text-sm md:text-base">
+                                        <p className="text-dark/70 dark:text-white/70 leading-relaxed font-sans mb-6 text-sm md:text-base">
                                             {project.description}
                                         </p>
 
                                         <div className="flex flex-wrap gap-2 mb-8">
                                             {project.tags.map(tag => (
-                                                <span key={tag} className="px-3 py-1 bg-gray-50 rounded-md text-xs text-gray-500 font-medium border border-gray-100">
+                                                <span key={tag} className="px-3 py-1 bg-gray-50 dark:bg-white/10 rounded-md text-xs text-gray-500 dark:text-gray-400 font-medium border border-gray-100 dark:border-white/20">
                                                     #{tag}
                                                 </span>
                                             ))}
@@ -181,14 +181,14 @@ export default function Projects() {
                                     </div>
 
                                     {/* Footer / Actions */}
-                                    <div className="pt-6 border-t border-gray-100 flex justify-between items-center">
+                                    <div className="pt-6 border-t border-gray-100 dark:border-white/10 flex justify-between items-center">
                                         {project.isPrivate ? (
                                             <div className="flex items-center gap-2 text-gray-400 text-sm font-medium">
                                                 <Lock size={16} />
                                                 <span>{PROJECTS_TEXT.privateLabel}</span>
                                             </div>
                                         ) : (
-                                            <a href="#" className="flex items-center gap-2 text-dark hover:text-primary font-medium text-sm transition-colors group/git">
+                                            <a href="#" className="flex items-center gap-2 text-dark dark:text-white hover:text-primary font-medium text-sm transition-colors group/git">
                                                 <Github size={18} />
                                                 <span>{PROJECTS_TEXT.viewCode}</span>
                                             </a>
@@ -215,7 +215,7 @@ export default function Projects() {
                                 className={`h-2 rounded-full transition-all duration-300
                                     ${idx === activeIndex
                                     ? 'w-8 bg-primary'
-                                    : 'w-2 bg-gray-300 hover:bg-primary/50'}
+                                    : 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-primary/50'}
                                 `}
                                 aria-label={`Ir al proyecto ${idx + 1}`}
                             />
