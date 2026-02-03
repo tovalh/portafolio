@@ -20,8 +20,8 @@ export const ABOUT_TEXT = {
     title: "Soy Cristóbal, pero todos me dicen",
     titleHighlight: "Toval",
     paragraphs: [
-        "Desarrollador Full Stack con un foco obsesivo en backend y bases de datos. Llevo más de un año y medio construyendo sistemas empresariales que manejan millones de registros sin pestañear, en una startup donde si algo se rompe, soy yo quien lo arregla.",
-        "Me especializo en hacer que sistemas complejos funcionen bajo presión real: optimización de queries, arquitecturas multi-database, integraciones entre países, y ese código legacy que nadie quiere tocar. Tengo la costumbre de dejar el código mejor de como lo encontré.",
+        "Desarrollador Full Stack con un foco en backend y bases de datos. Llevo más de un año y medio construyendo sistemas empresariales que manejan millones de registros sin pestañear, en una startup donde si algo se rompe, soy yo quien lo arregla.",
+        "Me especializo en hacer que sistemas complejos funcionen bajo presión real: páginas respondiendo en menos de 2 segundos, arquitecturas multi-database, construccin de API entre países, y ese código legacy que nadie quiere tocar. Tengo la costumbre de dejar el código mejor de como lo encontré.",
         "Actualmente expandiendo mi stack hacia TypeScript y Node.js, porque el aprendizaje nunca termina y el ecosistema JavaScript tiene cosas interesantes que ofrecer."
     ]
 };

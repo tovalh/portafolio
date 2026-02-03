@@ -86,11 +86,11 @@ function Card({ card }: { card: TechCard }) {
 
             {/* Metric: Experience */}
             <div className="mt-auto pt-4 border-t border-gray-100/50">
-                <div className="flex justify-between items-end">
+                <div className="flex justify-between items-end lg:flex-col lg:items-start lg:gap-1">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{SKILLS_TEXT.experienceLabel}</span>
                     <span className={`font-mono font-bold text-base ${style.text}`}>
-                {card.experience}
-            </span>
+                        {card.experience}
+                    </span>
                 </div>
             </div>
 
