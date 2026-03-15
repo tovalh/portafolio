@@ -35,6 +35,8 @@ export interface TimelineItem {
     role: string;
     company: string;
     period: string;
+    startDate?: string; // formato: 'YYYY-MM'
+    endDate?: string;   // formato: 'YYYY-MM' | undefined = presente
     description: string;
     type: 'work' | 'education';
     tech?: string[];

@@ -102,7 +102,7 @@ export default function Header() {
                 <div className="hidden md:flex gap-8 items-center">
                     <a href="#about" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[1].name}</a>
                     <a href="#experience" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[2].name}</a>
-                    <a href="#projects" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[3].name}</a>
+                    {/* <a href="#projects" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[3].name}</a> */}
                     <a href="#contact" className="px-5 py-2 bg-dark dark:bg-primary text-white rounded-full font-medium text-sm hover:bg-primary dark:hover:bg-primary/80 transition-colors shadow-lg hover:shadow-primary/30">
                         {HEADER_TEXT.contactButton}
                     </a>

@@ -9,7 +9,14 @@ import {
     Laravel,
     Redis,
     AWS,
-    WordPress
+    WordPress,
+    JQuery,
+    Git,
+    Bootstrap5,
+    MariaDB,
+    PostgreSQL,
+    Java,
+    Spring
 } from 'developer-icons';
 
 const TECH_ICON_MAP: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
@@ -19,7 +26,15 @@ const TECH_ICON_MAP: Record<string, React.ComponentType<{ className?: string; si
     aws: AWS,
     wordpress: WordPress,
     php: PHP,
-    javascript: JavaScript
+    javascript: JavaScript,
+    jquery: JQuery,
+    git: Git,
+    bootstrap: Bootstrap5,
+    mariadb: MariaDB,
+    postgresql: PostgreSQL,
+    java: Java,
+    spring: Spring,
+    'spring boot': Spring,
 };
 
 function getTechIcon(techName: string) {
@@ -27,7 +42,21 @@ function getTechIcon(techName: string) {
     return TECH_ICON_MAP[key] || null;
 }
 
+function getDuration(startDate?: string, endDate?: string): string | null {
+    if (!startDate) return null;
+    const start = new Date(`${startDate}-01`);
+    const end = endDate ? new Date(`${endDate}-01`) : new Date();
+    const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+    if (months < 1) return null;
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+    if (years === 0) return `${remainingMonths} ${remainingMonths === 1 ? 'mes' : 'meses'}`;
+    if (remainingMonths === 0) return `${years} ${years === 1 ? 'año' : 'años'}`;
+    return `${years} ${years === 1 ? 'año' : 'años'} ${remainingMonths} ${remainingMonths === 1 ? 'mes' : 'meses'}`;
+}
+
 function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean }) {
+    const duration = getDuration(item.startDate, item.endDate);
     return (
         <div className={`relative w-full md:w-[45%] ${isLeft ? 'md:mr-auto' : 'md:ml-auto'}`}>
             <div className={`bg-white/70 dark:bg-white/10 backdrop-blur-md p-6 rounded-3xl border transition-all duration-300 hover:shadow-xl relative hover:-translate-y-1
@@ -43,7 +72,7 @@ function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2 text-xs font-mono font-bold text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-white/50 dark:bg-white/10 px-2 py-1 rounded-md w-fit">
                         <Calendar size={12} />
-                        {item.period}
+                        {item.period}{duration && <span className="text-primary/70 normal-case">({duration})</span>}
                     </div>
                     {/* Mobile Only Icon */}
                     <div className="md:hidden">

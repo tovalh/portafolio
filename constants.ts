@@ -21,8 +21,8 @@ export const ABOUT_TEXT = {
     titleHighlight: "Toval",
     paragraphs: [
         "Desarrollador Full Stack con un foco en backend y bases de datos. Llevo más de un año y medio construyendo sistemas empresariales que manejan millones de registros sin pestañear, en una startup donde si algo se rompe, soy yo quien lo arregla.",
-        "Me especializo en hacer que sistemas complejos funcionen bajo presión real: páginas respondiendo en menos de 2 segundos, arquitecturas multi-database, construccin de API entre países, y ese código legacy que nadie quiere tocar. Tengo la costumbre de dejar el código mejor de como lo encontré.",
-        "Actualmente expandiendo mi stack hacia TypeScript y Node.js, porque el aprendizaje nunca termina y el ecosistema JavaScript tiene cosas interesantes que ofrecer."
+        "Me especializo en hacer que sistemas complejos funcionen bajo presión real: páginas respondiendo en menos de 2 segundos, arquitecturas multi-database, construcción de API entre países, y ese código legacy que nadie quiere tocar. Tengo la costumbre de dejar el código mejor de como lo encontré.",
+        "Actualmente profundizando mis raíces en backend con Java y Spring Boot, consolidando buenas prácticas en PHP, y explorando sistemas embebidos como nuevo territorio técnico."
     ]
 };
 
@@ -47,7 +47,7 @@ export const CONTACT_TEXT = {
     description: "Escríbeme. Respondo rápido (a menos que esté apagando otro incendio o tomando café).",
     email: {
         title: "Email",
-        subtitle: "Para cosas serias",
+        subtitle: "Para contacto directo",
         href: "mailto:crisvalladares98@gmail.com"
     },
     linkedin: {
@@ -131,7 +131,7 @@ export const SKILLS_TEXT = {
 export const CORE_STACK: TechCard[] = [
     {
         id: "php",
-        name: "PHP 8",
+        name: "PHP",
         role: "Backend Core",
         type: "backend",
         description: "Robusto, tipado y moderno. La base de la mayoría de mis sistemas de producción.",
@@ -151,7 +151,7 @@ export const CORE_STACK: TechCard[] = [
         role: "Enterprise",
         type: "backend",
         description: "Para arquitecturas estrictas. Inyección de dependencias y seguridad de tipos.",
-        experience: "1 Año"
+        experience: "6 meses"
     },
     {
         id: "javascript",
@@ -200,36 +200,40 @@ export const TIMELINE_DATA: TimelineItem[] = [
     {
         id: 1,
         role: "Full Stack Developer",
-        company: "Startup Tecnológica",
-        period: "2023 - Presente",
-        description: "Responsable de que la base de datos no colapse. Migración de legacy a arquitecturas modernas.",
+        company: "Kudos · Startup ERP",
+        period: "Nov 2024 - Presente",
+        startDate: "2024-11",
+        description: "Construyendo un ERP desde adentro en una startup donde 'no funciona' no es una opción. Desarrollo de módulos críticos con PHP y JavaScript, manejo de bases de datos relacionales bajo presión real y versionado con Git en equipo. El tipo que también toca el frontend cuando hace falta.",
         type: 'work',
-        tech: ["Laravel", "MySQL", "Redis", "AWS"],
+        tech: ["PHP", "JavaScript", "JQuery", "Git", "Bootstrap", "MySQL", "MariaDB"],
         highlight: true
     },
     {
         id: 2,
         role: "Ingeniería en Informática",
-        company: "Universidad Tecnológica",
-        period: "2023 - Presente",
-        description: "Estudiando de noche mientras los servidores arden de día. Especialización en arquitectura de software.",
+        company: "Universidad Andrés Bello",
+        period: "2025 - Presente",
+        description: "Profundizando en arquitectura de software, algoritmos y teoría que me permite entender cómo construir sistemas más sólidos y escalables. El viaje largo, pero con destino claro.",
         type: 'education'
     },
     {
         id: 3,
-        role: "Junior Developer",
-        company: "Freelance / Proyectos",
-        period: "2021 - 2022",
-        description: "La etapa salvaje. Construí sitios web y scripts de automatización. Aprendí a la mala que los backups son religión.",
+        role: "Developer",
+        company: "Colegio Marcela Paz",
+        period: "Jul 2024 - Nov 2024",
+        startDate: "2024-07",
+        endDate: "2024-11",
+        description: "Primera experiencia laboral real: sistemas para un colegio con Java y Spring Boot conectado a PostgreSQL. Aprendí que los datos de alumnos no pueden explotar y que los profesores no toleran bugs en viernes.",
         type: 'work',
-        tech: ["WordPress", "PHP", "JavaScript"]
+        tech: ["Java", "Spring Boot", "PostgreSQL"]
     },
     {
         id: 4,
         role: "Técnico en Informática",
-        company: "Instituto Profesional",
-        period: "2019 - 2021",
-        description: "Bases sólidas en programación y redes. Aquí comenzó todo.",
-        type: 'education'
+        company: "Universidad Técnica Federico Santa María",
+        period: "2023 - 2024",
+        description: "Donde todo empezó. Bases sólidas en programación, redes y sistemas. El lugar que convirtió la curiosidad en una carrera.",
+        type: 'education',
+        tech: ["Laravel"]
     }
 ];
