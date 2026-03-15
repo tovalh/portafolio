@@ -29,14 +29,14 @@ export const metadata: Metadata = {
     description: "Full Stack Developer especializado en backend y bases de datos. Sistemas que aguantan presión real.",
     url: "https://toval.dev",
     siteName: "toval.dev",
-    images: [{ url: "/images/Logo_Toval.png", width: 800, height: 800 }],
+    images: [{ url: "/images/icon.png", width: 800, height: 800 }],
     type: "website",
   },
   twitter: {
     card: "summary",
     title: "Cristóbal Valladares — Full Stack Developer",
     description: "Full Stack Developer especializado en backend y bases de datos. Sistemas que aguantan presión real.",
-    images: ["/images/Logo_Toval.png"],
+    images: ["/images/icon.png"],
   },
 };
 
