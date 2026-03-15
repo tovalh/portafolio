@@ -41,4 +41,5 @@ export interface TimelineItem {
     type: 'work' | 'education';
     tech?: string[];
     highlight?: boolean;
+    achievements?: string[];
 }

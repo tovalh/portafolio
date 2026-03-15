@@ -206,7 +206,17 @@ export const TIMELINE_DATA: TimelineItem[] = [
         description: "Construyendo un ERP desde adentro en una startup donde 'no funciona' no es una opción. Desarrollo de módulos críticos con PHP y JavaScript, manejo de bases de datos relacionales bajo presión real y versionado con Git en equipo. El tipo que también toca el frontend cuando hace falta.",
         type: 'work',
         tech: ["PHP", "JavaScript", "JQuery", "Git", "Bootstrap", "MySQL", "MariaDB"],
-        highlight: true
+        highlight: true,
+        achievements: [
+            "Diseñé consultas SQL que procesan eficientemente más de 1,000,000 de registros mediante indexación y joins optimizados",
+            "Desarrollé arquitectura backend en PHP con tiempos de respuesta consistentes por debajo de 2 segundos",
+            "Participé en el desarrollo de un coordinador de transacciones distribuidas que sincroniza 5+ bases de datos con rollback atómico",
+            "Desarrollé junto al equipo una API REST con autenticación JWT para sincronización de facturación electrónica en tiempo real entre Chile y España (integración SII)",
+            "Fui parte del equipo que construyó un módulo contable completo con todas las reglas de negocio",
+            "Implementé sistema de conciliación bancaria con matching automático/manual (relaciones N:M) e importación configurable por banco",
+            "Participé en migración de módulos de PHP 5.6 a PHP 8.x introduciendo clases y funciones reutilizables",
+            "Integración con Transbank para procesamiento de pagos"
+        ]
     },
     {
         id: 2,
@@ -225,7 +235,12 @@ export const TIMELINE_DATA: TimelineItem[] = [
         endDate: "2024-11",
         description: "Primera experiencia laboral real: sistemas para un colegio con Java y Spring Boot conectado a PostgreSQL. Aprendí que los datos de alumnos no pueden explotar y que los profesores no toleran bugs en viernes.",
         type: 'work',
-        tech: ["Java", "Spring Boot", "PostgreSQL"]
+        tech: ["Java", "Spring Boot", "PostgreSQL"],
+        achievements: [
+            "Implementé integraciones con Google API que automatizan la sincronización de datos para 200+ usuarios, eliminando el ingreso manual",
+            "Construí sistema de planificación estratégica con Java y Spring Boot",
+            "Participé en diseño de APIs RESTful y modelado de base de datos con PostgreSQL"
+        ]
     },
     {
         id: 4,

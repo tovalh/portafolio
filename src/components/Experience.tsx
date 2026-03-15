@@ -1,5 +1,6 @@
-import React from 'react';
-import { Briefcase, GraduationCap, Calendar } from 'lucide-react';
+'use client';
+import React, { useState } from 'react';
+import { Briefcase, GraduationCap, Calendar, ChevronDown } from 'lucide-react';
 import { TimelineItem } from '../../types';
 import { EXPERIENCE_TEXT, TIMELINE_DATA } from '../../constants';
 import {
@@ -57,6 +58,7 @@ function getDuration(startDate?: string, endDate?: string): string | null {
 
 function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean }) {
     const duration = getDuration(item.startDate, item.endDate);
+    const [open, setOpen] = useState(false);
     return (
         <div className={`relative w-full md:w-[45%] ${isLeft ? 'md:mr-auto' : 'md:ml-auto'}`}>
             <div className={`bg-white/70 dark:bg-white/10 backdrop-blur-md p-6 rounded-3xl border transition-all duration-300 hover:shadow-xl relative hover:-translate-y-1
@@ -95,9 +97,32 @@ function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean 
                     {item.description}
                 </p>
 
+                {/* Acordeón de logros */}
+                {item.achievements && item.achievements.length > 0 && (
+                    <div className="mt-4">
+                        <button
+                            onClick={() => setOpen(v => !v)}
+                            className="flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary/70 transition-colors"
+                        >
+                            {open ? 'Ocultar logros' : `Ver logros destacados (${item.achievements.length})`}
+                            <ChevronDown size={12} className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
+                        </button>
+
+                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${open ? 'max-h-[600px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
+                            <ul className="list-disc list-inside space-y-2 pl-1 [&>li::marker]:text-primary">
+                                {item.achievements.map((a, i) => (
+                                    <li key={i} className="text-sm text-dark/65 dark:text-white/65 leading-relaxed">
+                                        {a}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                )}
+
                 {/* Tech Stack for Jobs */}
                 {item.tech && (
-                    <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100/50 dark:border-white/10">
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100/50 dark:border-white/10 mt-4">
                         {item.tech.map(t => {
                             const IconComponent = getTechIcon(t);
                             return (

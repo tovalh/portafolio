@@ -19,10 +19,24 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "toval.dev - Portfolio",
-  description: "Creado por Tovalh",
+  title: "Cristóbal Valladares — Full Stack Developer",
+  description: "Full Stack Developer especializado en backend y bases de datos. Sistemas que aguantan presión real.",
   icons: {
     icon: "/images/icon.png",
+  },
+  openGraph: {
+    title: "Cristóbal Valladares — Full Stack Developer",
+    description: "Full Stack Developer especializado en backend y bases de datos. Sistemas que aguantan presión real.",
+    url: "https://toval.dev",
+    siteName: "toval.dev",
+    images: [{ url: "/images/Logo_Toval.png", width: 800, height: 800 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Cristóbal Valladares — Full Stack Developer",
+    description: "Full Stack Developer especializado en backend y bases de datos. Sistemas que aguantan presión real.",
+    images: ["/images/Logo_Toval.png"],
   },
 };
 
@@ -32,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
           className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}>
       <Header />

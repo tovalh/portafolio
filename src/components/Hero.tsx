@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { Database, ShieldCheck } from 'lucide-react';
+import { Database, ShieldCheck, Download } from 'lucide-react';
 import { HERO_TEXT } from '../../constants';
 
 export default function Hero() {
@@ -72,11 +72,19 @@ export default function Hero() {
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-4 mt-10">
-                    <a href="#projects" className="px-8 py-4 bg-gradient-to-r from-primary to-alert text-white font-bold rounded-full shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 transition-all flex items-center justify-center gap-2">
+                    {/* <a href="#projects" className="px-8 py-4 bg-gradient-to-r from-primary to-alert text-white font-bold rounded-full shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 transition-all flex items-center justify-center gap-2">
                         {HERO_TEXT.ctaPrimary}
-                    </a>
+                    </a> */}
                     <a href="#contact" className="px-8 py-4 bg-white dark:bg-white/10 border-2 border-secondary text-secondary font-bold rounded-full hover:bg-secondary/5 dark:hover:bg-secondary/20 hover:scale-105 transition-all flex items-center justify-center gap-2">
                         {HERO_TEXT.ctaSecondary}
+                    </a>
+                    <a
+                        href="/Cv Cristobal Valladares.pdf"
+                        download
+                        className="px-8 py-4 bg-white dark:bg-white/10 border-2 border-dark/30 dark:border-white/30 text-dark/70 dark:text-white/70 font-bold rounded-full hover:border-dark/60 dark:hover:border-white/60 hover:text-dark dark:hover:text-white hover:scale-105 transition-all flex items-center justify-center gap-2"
+                    >
+                        <Download size={16} />
+                        Descargar CV
                     </a>
                 </div>
 
