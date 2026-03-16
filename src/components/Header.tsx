@@ -16,6 +16,7 @@ interface Spark {
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const [sparks, setSparks] = useState<Spark[]>([]);
     const requestRef = useRef<number>(0);
     const { isDark, toggleTheme, mounted } = useTheme();
@@ -136,13 +137,28 @@ export default function Header() {
                             )}
                         </button>
                     )}
-                    <div className="space-y-1.5 cursor-pointer group">
-                        <div className="w-6 h-0.5 bg-dark dark:bg-white group-hover:bg-primary transition-colors"></div>
-                        <div className="w-4 h-0.5 bg-dark dark:bg-white group-hover:bg-primary group-hover:w-6 transition-all"></div>
-                        <div className="w-6 h-0.5 bg-dark dark:bg-white group-hover:bg-primary transition-colors"></div>
-                    </div>
+                    <button
+                        onClick={() => setMenuOpen(prev => !prev)}
+                        className="space-y-1.5 cursor-pointer group p-1"
+                        aria-label="Toggle menu"
+                    >
+                        <div className={`w-6 h-0.5 bg-dark dark:bg-white transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+                        <div className={`h-0.5 bg-dark dark:bg-white transition-all ${menuOpen ? 'opacity-0 w-6' : 'w-4'}`}></div>
+                        <div className={`w-6 h-0.5 bg-dark dark:bg-white transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
+                    </button>
                 </div>
 
             </div>
+
+            {/* Mobile Menu */}
+            {menuOpen && (
+                <div className="md:hidden bg-white/95 dark:bg-[#12121a]/95 backdrop-blur-md border-t border-gray-200 dark:border-white/10 px-6 py-4 flex flex-col gap-4">
+                    <a href="#about" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[1].name}</a>
+                    <a href="#experience" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[2].name}</a>
+                    <a href="#contact" onClick={() => setMenuOpen(false)} className="px-5 py-2 bg-dark dark:bg-primary text-white rounded-full font-medium text-sm hover:bg-primary dark:hover:bg-primary/80 transition-colors text-center">
+                        {HEADER_TEXT.contactButton}
+                    </a>
+                </div>
+            )}
         </nav> )
 }
