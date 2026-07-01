@@ -8,7 +8,7 @@ export default function Hero() {
     const t = useTranslations('Hero');
 
     return (
-        <section className="min-h-screen flex flex-col justify-center items-center relative px-6 pt-20">
+        <section className="min-h-screen flex flex-col justify-center items-center relative px-6">
 
             {/* Main Content Container */}
             <div className="relative z-10 max-w-4xl w-full text-center flex flex-col items-center">
