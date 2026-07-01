@@ -1,8 +1,9 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { Sun, Moon } from 'lucide-react'
-import { NAV_LINKS, HEADER_TEXT } from '../../constants';
+import { useTranslations } from 'next-intl';
 import { useTheme } from '../hooks/useTheme';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface Spark {
     id: number;
@@ -20,6 +21,7 @@ export default function Header() {
     const [sparks, setSparks] = useState<Spark[]>([]);
     const requestRef = useRef<number>(0);
     const { isDark, toggleTheme, mounted } = useTheme();
+    const t = useTranslations('Header');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -96,22 +98,23 @@ export default function Header() {
                     className="font-display font-bold text-2xl text-dark dark:text-white tracking-tighter hover:text-primary transition-colors cursor-pointer select-none"
                     onMouseEnter={triggerExplosion}
                 >
-                    {HEADER_TEXT.logo}<span className="text-primary">.</span>
+                    {t('logo')}<span className="text-primary">.</span>
                 </a>
 
                 {/* Links */}
                 <div className="hidden md:flex gap-8 items-center">
-                    <a href="#about" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[1].name}</a>
-                    <a href="#experience" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[2].name}</a>
-                    {/* <a href="#projects" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[3].name}</a> */}
+                    <a href="#about" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navAbout')}</a>
+                    <a href="#experience" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navExperience')}</a>
+                    {/* <a href="#projects" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navProjects')}</a> */}
                     <a href="#contact" className="px-5 py-2 bg-dark dark:bg-primary text-white rounded-full font-medium text-sm hover:bg-primary dark:hover:bg-primary/80 transition-colors shadow-lg hover:shadow-primary/30">
-                        {HEADER_TEXT.contactButton}
+                        {t('contactButton')}
                     </a>
+                    <LanguageSwitcher />
                     {mounted && (
                         <button
                             onClick={toggleTheme}
                             className="p-2.5 rounded-full bg-white dark:bg-white/10 border border-gray-200 dark:border-white/20 hover:border-primary dark:hover:border-primary transition-all hover:scale-110"
-                            aria-label="Toggle theme"
+                            aria-label={t('toggleTheme')}
                         >
                             {isDark ? (
                                 <Sun size={18} className="text-primary" />
@@ -123,12 +126,13 @@ export default function Header() {
                 </div>
 
                 {/* Mobile */}
-                <div className="md:hidden flex items-center gap-4">
+                <div className="md:hidden flex items-center gap-3">
+                    <LanguageSwitcher size="sm" />
                     {mounted && (
                         <button
                             onClick={toggleTheme}
                             className="p-2 rounded-full bg-white dark:bg-white/10 border border-gray-200 dark:border-white/20"
-                            aria-label="Toggle theme"
+                            aria-label={t('toggleTheme')}
                         >
                             {isDark ? (
                                 <Sun size={16} className="text-primary" />
@@ -140,7 +144,7 @@ export default function Header() {
                     <button
                         onClick={() => setMenuOpen(prev => !prev)}
                         className="space-y-1.5 cursor-pointer group p-1"
-                        aria-label="Toggle menu"
+                        aria-label={t('toggleMenu')}
                     >
                         <div className={`w-6 h-0.5 bg-dark dark:bg-white transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
                         <div className={`h-0.5 bg-dark dark:bg-white transition-all ${menuOpen ? 'opacity-0 w-6' : 'w-4'}`}></div>
@@ -153,12 +157,13 @@ export default function Header() {
             {/* Mobile Menu */}
             {menuOpen && (
                 <div className="md:hidden bg-white/95 dark:bg-[#12121a]/95 backdrop-blur-md border-t border-gray-200 dark:border-white/10 px-6 py-4 flex flex-col gap-4">
-                    <a href="#about" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[1].name}</a>
-                    <a href="#experience" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{NAV_LINKS[2].name}</a>
+                    <a href="#about" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navAbout')}</a>
+                    <a href="#experience" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navExperience')}</a>
                     <a href="#contact" onClick={() => setMenuOpen(false)} className="px-5 py-2 bg-dark dark:bg-primary text-white rounded-full font-medium text-sm hover:bg-primary dark:hover:bg-primary/80 transition-colors text-center">
-                        {HEADER_TEXT.contactButton}
+                        {t('contactButton')}
                     </a>
                 </div>
             )}
-        </nav> )
+        </nav>
+    );
 }

@@ -2,11 +2,19 @@
 
 import React, { useState } from 'react';
 import { Mail, Linkedin, Github, Coffee, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
-import { CONTACT_TEXT } from '../../constants';
+import { useTranslations } from 'next-intl';
 
 type FormState = 'idle' | 'loading' | 'success' | 'error';
 
+// Enlaces/emails son locale-agnósticos
+const CONTACT_LINKS = {
+    email: 'mailto:crisvalladares98@gmail.com',
+    linkedin: 'https://linkedin.com/in/cristobal-valladares',
+    github: 'https://github.com/tovalh'
+};
+
 export default function Contact() {
+    const t = useTranslations('Contact');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
@@ -43,47 +51,47 @@ export default function Contact() {
                 </div>
 
                 <h2 className="font-display text-4xl md:text-6xl font-bold text-dark dark:text-white mb-6">
-                    {CONTACT_TEXT.title} <br/> <span className="text-primary">{CONTACT_TEXT.titleHighlight}</span>
+                    {t('title')} <br/> <span className="text-primary">{t('titleHighlight')}</span>
                 </h2>
 
                 <p className="text-xl text-dark/60 dark:text-white/60 max-w-2xl mx-auto mb-12">
-                    {CONTACT_TEXT.description}
+                    {t('description')}
                 </p>
 
                 {/* Formulario */}
                 <form onSubmit={handleSubmit} className="bg-white/70 dark:bg-white/10 backdrop-blur-md rounded-3xl border border-white/50 dark:border-white/20 shadow-lg p-8 mb-10 text-left">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-bold uppercase tracking-wider text-dark/50 dark:text-white/50">Nombre</label>
+                            <label className="text-xs font-bold uppercase tracking-wider text-dark/50 dark:text-white/50">{t('form.nameLabel')}</label>
                             <input
                                 type="text"
                                 required
                                 value={name}
                                 onChange={e => setName(e.target.value)}
-                                placeholder="Tu nombre"
+                                placeholder={t('form.namePlaceholder')}
                                 className="bg-white dark:bg-white/10 border border-gray-200 dark:border-white/20 rounded-xl px-4 py-3 text-dark dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/30 focus:outline-none focus:border-primary transition-colors text-sm"
                             />
                         </div>
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-bold uppercase tracking-wider text-dark/50 dark:text-white/50">Email</label>
+                            <label className="text-xs font-bold uppercase tracking-wider text-dark/50 dark:text-white/50">{t('form.emailLabel')}</label>
                             <input
                                 type="email"
                                 required
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                placeholder="tu@email.com"
+                                placeholder={t('form.emailPlaceholder')}
                                 className="bg-white dark:bg-white/10 border border-gray-200 dark:border-white/20 rounded-xl px-4 py-3 text-dark dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/30 focus:outline-none focus:border-primary transition-colors text-sm"
                             />
                         </div>
                     </div>
                     <div className="flex flex-col gap-1.5 mb-6">
-                        <label className="text-xs font-bold uppercase tracking-wider text-dark/50 dark:text-white/50">Mensaje</label>
+                        <label className="text-xs font-bold uppercase tracking-wider text-dark/50 dark:text-white/50">{t('form.messageLabel')}</label>
                         <textarea
                             required
                             rows={5}
                             value={message}
                             onChange={e => setMessage(e.target.value)}
-                            placeholder="Cuéntame qué tienes en mente..."
+                            placeholder={t('form.messagePlaceholder')}
                             className="bg-white dark:bg-white/10 border border-gray-200 dark:border-white/20 rounded-xl px-4 py-3 text-dark dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/30 focus:outline-none focus:border-primary transition-colors text-sm resize-none"
                         />
                     </div>
@@ -91,12 +99,12 @@ export default function Contact() {
                     {/* Feedback */}
                     {formState === 'success' && (
                         <div className="flex items-center gap-2 text-green-600 dark:text-green-400 text-sm mb-4 font-medium">
-                            <CheckCircle size={16} /> Mensaje enviado. Te respondo pronto.
+                            <CheckCircle size={16} /> {t('form.success')}
                         </div>
                     )}
                     {formState === 'error' && (
                         <div className="flex items-center gap-2 text-red-500 text-sm mb-4 font-medium">
-                            <AlertCircle size={16} /> Algo falló. Intenta de nuevo o escríbeme directo.
+                            <AlertCircle size={16} /> {t('form.error')}
                         </div>
                     )}
 
@@ -106,45 +114,45 @@ export default function Contact() {
                         className="flex items-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed text-sm ml-auto"
                     >
                         {formState === 'loading' ? (
-                            <><Loader2 size={16} className="animate-spin" /> Enviando...</>
+                            <><Loader2 size={16} className="animate-spin" /> {t('form.sending')}</>
                         ) : (
-                            <><Send size={16} /> Enviar mensaje</>
+                            <><Send size={16} /> {t('form.submit')}</>
                         )}
                     </button>
                 </form>
 
                 {/* Links rápidos */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                    <a href={CONTACT_TEXT.email.href} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-primary transition-all shadow-lg hover:shadow-primary/20 flex flex-col items-center">
+                    <a href={CONTACT_LINKS.email} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-primary transition-all shadow-lg hover:shadow-primary/20 flex flex-col items-center">
                         <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <Mail className="w-6 h-6 text-primary" />
                         </div>
-                        <h3 className="font-bold text-dark dark:text-white text-lg mb-1">{CONTACT_TEXT.email.title}</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{CONTACT_TEXT.email.subtitle}</p>
+                        <h3 className="font-bold text-dark dark:text-white text-lg mb-1">{t('email.title')}</h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('email.subtitle')}</p>
                     </a>
 
-                    <a href={CONTACT_TEXT.linkedin.href} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-secondary transition-all shadow-lg hover:shadow-secondary/20 flex flex-col items-center">
+                    <a href={CONTACT_LINKS.linkedin} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-secondary transition-all shadow-lg hover:shadow-secondary/20 flex flex-col items-center">
                         <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <Linkedin className="w-6 h-6 text-secondary" />
                         </div>
-                        <h3 className="font-bold text-dark dark:text-white text-lg mb-1">{CONTACT_TEXT.linkedin.title}</h3>
+                        <h3 className="font-bold text-dark dark:text-white text-lg mb-1">{t('linkedin.title')}</h3>
                         <div className="px-2 py-0.5 bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 text-[10px] font-bold rounded-full mt-1">
-                            {CONTACT_TEXT.linkedin.badge}
+                            {t('linkedin.badge')}
                         </div>
                     </a>
 
-                    <a href={CONTACT_TEXT.github.href} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-dark dark:hover:border-white/50 transition-all shadow-lg hover:shadow-gray-300 dark:hover:shadow-white/10 flex flex-col items-center">
+                    <a href={CONTACT_LINKS.github} className="group bg-background rounded-2xl p-6 border-2 border-transparent hover:border-dark dark:hover:border-white/50 transition-all shadow-lg hover:shadow-gray-300 dark:hover:shadow-white/10 flex flex-col items-center">
                         <div className="w-12 h-12 bg-gray-200 dark:bg-white/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <Github className="w-6 h-6 text-dark dark:text-white" />
                         </div>
-                        <h3 className="font-bold text-dark dark:text-white text-lg mb-1">{CONTACT_TEXT.github.title}</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{CONTACT_TEXT.github.subtitle}</p>
+                        <h3 className="font-bold text-dark dark:text-white text-lg mb-1">{t('github.title')}</h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('github.subtitle')}</p>
                     </a>
                 </div>
 
                 <div className="mt-20 pt-10 border-t border-gray-100 dark:border-white/10 text-center text-gray-400 dark:text-gray-500 text-sm">
-                    <p>© {new Date().getFullYear()} {CONTACT_TEXT.footer.copyright}</p>
-                    <p className="mt-2 text-xs">{CONTACT_TEXT.footer.madeWith}</p>
+                    <p>© {new Date().getFullYear()} {t('footer.copyright')}</p>
+                    <p className="mt-2 text-xs">{t('footer.madeWith')}</p>
                 </div>
 
             </div>

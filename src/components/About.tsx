@@ -1,8 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import { ABOUT_TEXT } from '../../constants';
+import { useTranslations } from 'next-intl';
 
 export default function About() {
+    const t = useTranslations('About');
+
     return (
         <section id="about" className="py-20 px-6 bg-transparent relative overflow-hidden">
 
@@ -20,7 +22,7 @@ export default function About() {
                                 priority
                             />
                             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 bg-accent text-white text-[10px] font-bold rounded-full font-mono">
-                                {ABOUT_TEXT.badgeText}
+                                {t('badgeText')}
                             </div>
                         </div>
                     </div>
@@ -28,17 +30,17 @@ export default function About() {
                     {/* Content Side */}
                     <div className="w-full md:w-2/3">
                         <div className="inline-block mb-4">
-                            <span className="text-primary font-bold font-mono tracking-widest text-sm uppercase">{ABOUT_TEXT.sectionLabel}</span>
+                            <span className="text-primary font-bold font-mono tracking-widest text-sm uppercase">{t('sectionLabel')}</span>
                         </div>
 
                         <h3 className="font-display text-3xl font-bold text-dark dark:text-white mb-6">
-                            {ABOUT_TEXT.title} <span className="text-secondary decoration-wavy underline decoration-2">{ABOUT_TEXT.titleHighlight}</span>.
+                            {t('title')} <span className="text-secondary decoration-wavy underline decoration-2">{t('titleHighlight')}</span>.
                         </h3>
 
                         <div className="space-y-4 text-dark/70 dark:text-white/70 font-sans leading-relaxed">
-                            {ABOUT_TEXT.paragraphs.map((paragraph, index) => (
-                                <p key={index}>{paragraph}</p>
-                            ))}
+                            <p>{t('paragraph1')}</p>
+                            <p>{t('paragraph2')}</p>
+                            <p>{t('paragraph3')}</p>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,220 @@
+{
+  "Metadata": {
+    "title": "Cristóbal Valladares — Full Stack Developer",
+    "description": "Full Stack Developer specialized in backend and databases. Systems that hold up under real pressure."
+  },
+  "Header": {
+    "logo": "Toval",
+    "contactButton": "Contact Me",
+    "navHome": "Home",
+    "navAbout": "About",
+    "navExperience": "Experience",
+    "navProjects": "Projects",
+    "navContact": "Contact",
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Change language",
+    "toggleMenu": "Menu"
+  },
+  "Hero": {
+    "availableBadge": "Available for new projects",
+    "statusBadge": "1M+ Records · <2s latency",
+    "tooltip": "Relax, everything's under control.",
+    "headline": "I make databases",
+    "headlineHighlight": "not explode.",
+    "headlineNote": "(yet)",
+    "subtitle": "Full Stack Developer · Backend · Systems that hold up under pressure",
+    "ctaPrimary": "See what I've built",
+    "ctaSecondary": "Let's talk",
+    "downloadCV": "Download CV",
+    "cvFile": "/Resume Cristobal Valladares.pdf"
+  },
+  "NotFound": {
+    "code": "404",
+    "queryLabel": "SELECT * FROM pages WHERE path = ?",
+    "queryResult": "→ 0 rows",
+    "title": "This route isn't indexed",
+    "description": "The page you're looking for isn't in my database. Maybe I moved it, deleted it, or it never existed. Everything else is still running, promise.",
+    "backHome": "Back to home",
+    "contact": "Report the bug"
+  },
+  "About": {
+    "sectionLabel": "About Me",
+    "badgeText": "SYSADMIN MODE",
+    "title": "I'm Cristóbal, but everyone calls me",
+    "titleHighlight": "Toval",
+    "paragraph1": "Full Stack Developer focused on backend and databases. I've spent over a year and a half building enterprise systems that handle millions of records without breaking a sweat, at a startup where if something breaks, I'm the one who fixes it.",
+    "paragraph2": "I specialize in making complex systems work under real pressure: pages responding in under 2 seconds, multi-database architectures, building APIs across countries, and that legacy code no one wants to touch. I have a habit of leaving code better than I found it.",
+    "paragraph3": "Currently deepening my backend roots with Java and Spring Boot, consolidating best practices in PHP, and exploring embedded systems as new technical territory."
+  },
+  "Experience": {
+    "title": "Battle",
+    "titleHighlight": "History",
+    "legendEducation": "Education",
+    "legendWork": "Work",
+    "endLabel": "START",
+    "showAchievements": "See key achievements",
+    "hideAchievements": "Hide achievements",
+    "monthSingular": "month",
+    "monthPlural": "months",
+    "yearSingular": "year",
+    "yearPlural": "years",
+    "present": "Present",
+    "items": {
+      "kudos": {
+        "role": "Full Stack Developer",
+        "company": "Kudos · ERP Startup",
+        "period": "Nov 2024 - Present",
+        "description": "Building an ERP from the inside at a startup where 'it doesn't work' isn't an option. Development of critical modules with PHP and JavaScript, handling relational databases under real pressure, and version control with Git in a team. The guy who also touches the frontend when needed.",
+        "achievements": [
+          "Designed SQL queries that efficiently process over 1,000,000 records through indexing and optimized joins",
+          "Developed PHP backend architecture with consistent response times under 2 seconds",
+          "Contributed to the development of a distributed transaction coordinator that syncs 5+ databases with atomic rollback",
+          "Co-developed a REST API with JWT authentication for real-time electronic invoicing sync between Chile and Spain (SII integration)",
+          "Part of the team that built a complete accounting module with all business rules",
+          "Implemented a bank reconciliation system with automatic/manual matching (N:M relationships) and configurable import per bank",
+          "Participated in migrating modules from PHP 5.6 to PHP 8.x, introducing reusable classes and functions",
+          "Integration with Transbank for payment processing"
+        ]
+      },
+      "unab": {
+        "role": "Computer Science Engineering",
+        "company": "Universidad Andrés Bello",
+        "period": "2025 - Present",
+        "description": "Going deeper into software architecture, algorithms, and theory that lets me understand how to build more solid and scalable systems. The long journey, but with a clear destination."
+      },
+      "marcelaPaz": {
+        "role": "Developer",
+        "company": "Colegio Marcela Paz",
+        "period": "Jul 2024 - Nov 2024",
+        "description": "First real work experience: systems for a school with Java and Spring Boot connected to PostgreSQL. I learned that student data cannot explode and that teachers don't tolerate bugs on Fridays.",
+        "achievements": [
+          "Implemented Google API integrations that automate data synchronization for 200+ users, eliminating manual entry",
+          "Built a strategic planning system with Java and Spring Boot",
+          "Contributed to RESTful API design and database modeling with PostgreSQL"
+        ]
+      },
+      "utfsm": {
+        "role": "Computer Science Technician",
+        "company": "Universidad Técnica Federico Santa María",
+        "period": "2023 - 2024",
+        "description": "Where it all started. Solid foundations in programming, networks, and systems. The place that turned curiosity into a career."
+      }
+    }
+  },
+  "Skills": {
+    "title": "Tech Arsenal",
+    "subtitle": "The tools I use to build robust solutions.",
+    "badge": "CORE STACK",
+    "secondaryTitle": "I also work with",
+    "experienceLabel": "Experience",
+    "core": {
+      "php": {
+        "name": "PHP",
+        "role": "Backend Core",
+        "description": "Robust, typed, and modern. The foundation of most of my production systems.",
+        "experience": "1.5 Yrs Prod."
+      },
+      "mysql": {
+        "name": "MySQL",
+        "role": "Persistence",
+        "description": "Efficient management of millions of records. Index optimization and complex queries.",
+        "experience": "1.5 Yrs Prod."
+      },
+      "java": {
+        "name": "Java / Spring",
+        "role": "Enterprise",
+        "description": "For strict architectures. Dependency injection and type safety.",
+        "experience": "6 months"
+      },
+      "javascript": {
+        "name": "JavaScript",
+        "role": "Interaction",
+        "description": "The glue that holds it all together. DOM manipulation, validations, and async logic.",
+        "experience": "1.5 Yrs"
+      },
+      "git": {
+        "name": "Git",
+        "role": "Version Control",
+        "description": "Version control, team workflows, and conflict resolution.",
+        "experience": "Daily"
+      }
+    },
+    "secondary": {
+      "mariadb": "MariaDB",
+      "postgresql": "PostgreSQL",
+      "linux": "Linux",
+      "postman": "Postman",
+      "laravel": "Laravel (Basic)",
+      "tailwind": "Tailwind CSS",
+      "bootstrap": "Bootstrap"
+    }
+  },
+  "Projects": {
+    "title": "What I've built",
+    "subtitle": "Spoiler: Still running",
+    "privateLabel": "Private Project",
+    "viewCode": "View Code",
+    "viewDetails": "View Details",
+    "systemStatus": "SYSTEM STATUS",
+    "goToProject": "Go to project",
+    "items": {
+      "multiDb": {
+        "title": "Multi-Database System",
+        "description": "5 databases that needed to talk to each other without destroying each other. Now they get along and share data in real time.",
+        "status": "5 DBs Synced",
+        "stats": "99.9% Uptime"
+      },
+      "apiInternational": {
+        "title": "International API",
+        "description": "Orchestration of shipments and logistics between two continents. Handles customs, inventory, and headaches automatically.",
+        "status": "Chile ↔ Spain",
+        "stats": "200ms Latency"
+      },
+      "accounting": {
+        "title": "Accounting Module",
+        "description": "A system that processes millions of financial records. If this fails, accountants cry. No one has cried in 6 months.",
+        "status": "1M+ Records",
+        "stats": "Zero Errors"
+      },
+      "banking": {
+        "title": "Bank Reconciliation",
+        "description": "Algorithms that find the missing cent among thousands of bank transactions. Basically black magic.",
+        "status": "Matching Active",
+        "stats": "Auto-Match"
+      }
+    }
+  },
+  "Contact": {
+    "title": "Got something that",
+    "titleHighlight": "shouldn't explode?",
+    "description": "Write me. I reply fast (unless I'm putting out another fire or having coffee).",
+    "form": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@email.com",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell me what you have in mind...",
+      "submit": "Send message",
+      "sending": "Sending...",
+      "success": "Message sent. I'll reply soon.",
+      "error": "Something failed. Try again or write me directly."
+    },
+    "email": {
+      "title": "Email",
+      "subtitle": "For direct contact"
+    },
+    "linkedin": {
+      "title": "LinkedIn",
+      "badge": "PROFESSIONAL MODE"
+    },
+    "github": {
+      "title": "GitHub",
+      "subtitle": "My experiments"
+    },
+    "footer": {
+      "copyright": "Cristóbal Valladares.",
+      "madeWith": "Made with React, Tailwind, and lots of coffee."
+    }
+  }
+}

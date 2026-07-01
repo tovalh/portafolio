@@ -1,10 +1,11 @@
 'use client'
 import { useState } from 'react';
 import { Database, ShieldCheck, Download } from 'lucide-react';
-import { HERO_TEXT } from '../../constants';
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
     const [isHovering, setIsHovering] = useState(false);
+    const t = useTranslations('Hero');
 
     return (
         <section className="min-h-screen flex flex-col justify-center items-center relative px-6 pt-20">
@@ -18,7 +19,7 @@ export default function Hero() {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    {HERO_TEXT.availableBadge}
+                    {t('availableBadge')}
                 </div>
 
                 {/* Status Badge */}
@@ -26,7 +27,7 @@ export default function Hero() {
                     <div className="relative flex h-3 w-3">
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </div>
-                    <span className="text-dark dark:text-white font-mono text-xs md:text-sm font-bold">{HERO_TEXT.statusBadge}</span>
+                    <span className="text-dark dark:text-white font-mono text-xs md:text-sm font-bold">{t('statusBadge')}</span>
                     <ShieldCheck className="w-4 h-4 text-green-600 dark:text-green-400" />
                 </div>
 
@@ -38,7 +39,7 @@ export default function Hero() {
                 >
                     {/* Tooltip */}
                     <div className={`absolute -top-12 left-1/2 transform -translate-x-1/2 bg-dark dark:bg-white/20 text-white text-xs px-3 py-1 rounded-lg transition-opacity duration-300 ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
-                        {HERO_TEXT.tooltip}
+                        {t('tooltip')}
                     </div>
 
                     {/* Core DB Icon */}
@@ -59,32 +60,32 @@ export default function Hero() {
 
                 {/* Headlines */}
                 <h1 className="font-display text-5xl md:text-7xl font-bold text-dark dark:text-white leading-tight mb-4">
-                    {HERO_TEXT.headline} <br/>
+                    {t('headline')} <br/>
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-alert inline-block relative">
-                        {HERO_TEXT.headlineHighlight}
-                        <span className="absolute -top-4 -right-8 text-sm text-dark dark:text-white font-mono bg-white dark:bg-white/10 px-2 py-1 rounded-md shadow-sm transform rotate-12 opacity-80 hidden md:block">{HERO_TEXT.headlineNote}</span>
+                        {t('headlineHighlight')}
+                        <span className="absolute -top-4 -right-8 text-sm text-dark dark:text-white font-mono bg-white dark:bg-white/10 px-2 py-1 rounded-md shadow-sm transform rotate-12 opacity-80 hidden md:block">{t('headlineNote')}</span>
                     </span>
                 </h1>
 
                 <h2 className="text-lg md:text-xl text-dark/70 dark:text-white/70 font-sans max-w-2xl mt-4">
-                    {HERO_TEXT.subtitle}
+                    {t('subtitle')}
                 </h2>
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-4 mt-10">
                     {/* <a href="#projects" className="px-8 py-4 bg-gradient-to-r from-primary to-alert text-white font-bold rounded-full shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 transition-all flex items-center justify-center gap-2">
-                        {HERO_TEXT.ctaPrimary}
+                        {t('ctaPrimary')}
                     </a> */}
                     <a href="#contact" className="px-8 py-4 bg-white dark:bg-white/10 border-2 border-secondary text-secondary font-bold rounded-full hover:bg-secondary/5 dark:hover:bg-secondary/20 hover:scale-105 transition-all flex items-center justify-center gap-2">
-                        {HERO_TEXT.ctaSecondary}
+                        {t('ctaSecondary')}
                     </a>
                     <a
-                        href="/Cv Cristobal Valladares.pdf"
+                        href={t('cvFile')}
                         download
                         className="px-8 py-4 bg-white dark:bg-white/10 border-2 border-dark/30 dark:border-white/30 text-dark/70 dark:text-white/70 font-bold rounded-full hover:border-dark/60 dark:hover:border-white/60 hover:text-dark dark:hover:text-white hover:scale-105 transition-all flex items-center justify-center gap-2"
                     >
                         <Download size={16} />
-                        Descargar CV
+                        {t('downloadCV')}
                     </a>
                 </div>
 

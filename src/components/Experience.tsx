@@ -1,8 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { Briefcase, GraduationCap, Calendar, ChevronDown } from 'lucide-react';
-import { TimelineItem } from '../../types';
-import { EXPERIENCE_TEXT, TIMELINE_DATA } from '../../constants';
+import { useTranslations } from 'next-intl';
+import { TIMELINE_CONFIG, TimelineConfigItem } from '../config/timeline';
 import {
     PHP,
     MySQL,
@@ -43,22 +43,39 @@ function getTechIcon(techName: string) {
     return TECH_ICON_MAP[key] || null;
 }
 
-function getDuration(startDate?: string, endDate?: string): string | null {
-    if (!startDate) return null;
-    const start = new Date(`${startDate}-01`);
-    const end = endDate ? new Date(`${endDate}-01`) : new Date();
-    const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-    if (months < 1) return null;
-    const years = Math.floor(months / 12);
-    const remainingMonths = months % 12;
-    if (years === 0) return `${remainingMonths} ${remainingMonths === 1 ? 'mes' : 'meses'}`;
-    if (remainingMonths === 0) return `${years} ${years === 1 ? 'año' : 'años'}`;
-    return `${years} ${years === 1 ? 'año' : 'años'} ${remainingMonths} ${remainingMonths === 1 ? 'mes' : 'meses'}`;
+function useDuration() {
+    const t = useTranslations('Experience');
+
+    return function getDuration(startDate?: string, endDate?: string): string | null {
+        if (!startDate) return null;
+        const start = new Date(`${startDate}-01`);
+        const end = endDate ? new Date(`${endDate}-01`) : new Date();
+        const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+        if (months < 1) return null;
+        const years = Math.floor(months / 12);
+        const remainingMonths = months % 12;
+        if (years === 0) return `${remainingMonths} ${remainingMonths === 1 ? t('monthSingular') : t('monthPlural')}`;
+        if (remainingMonths === 0) return `${years} ${years === 1 ? t('yearSingular') : t('yearPlural')}`;
+        return `${years} ${years === 1 ? t('yearSingular') : t('yearPlural')} ${remainingMonths} ${remainingMonths === 1 ? t('monthSingular') : t('monthPlural')}`;
+    };
 }
 
-function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean }) {
+function ExperienceCard({ item, isLeft }: { item: TimelineConfigItem; isLeft: boolean }) {
+    const t = useTranslations('Experience');
+    const getDuration = useDuration();
     const duration = getDuration(item.startDate, item.endDate);
     const [open, setOpen] = useState(false);
+
+    const role = t(`items.${item.key}.role`);
+    const company = t(`items.${item.key}.company`);
+    const period = t(`items.${item.key}.period`);
+    const description = t(`items.${item.key}.description`);
+
+    // Obtiene los achievements desde messages usando t.raw para acceder al array
+    const achievements: string[] = item.hasAchievements
+        ? (t.raw(`items.${item.key}.achievements`) as string[])
+        : [];
+
     return (
         <div className={`relative w-full md:w-[45%] ${isLeft ? 'md:mr-auto' : 'md:ml-auto'}`}>
             <div className={`bg-white/70 dark:bg-white/10 backdrop-blur-md p-6 rounded-3xl border transition-all duration-300 hover:shadow-xl relative hover:-translate-y-1
@@ -74,7 +91,7 @@ function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2 text-xs font-mono font-bold text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-white/50 dark:bg-white/10 px-2 py-1 rounded-md w-fit">
                         <Calendar size={12} />
-                        {item.period}{duration && <span className="text-primary/70 normal-case">({duration})</span>}
+                        {period}{duration && <span className="text-primary/70 normal-case">({duration})</span>}
                     </div>
                     {/* Mobile Only Icon */}
                     <div className="md:hidden">
@@ -87,30 +104,30 @@ function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean 
                 </div>
 
                 <h3 className="font-display font-bold text-xl text-dark dark:text-white leading-tight mb-1">
-                    {item.role}
+                    {role}
                 </h3>
                 <p className={`font-medium text-sm mb-4 ${item.type === 'work' ? 'text-secondary' : 'text-accent'}`}>
-                    {item.company}
+                    {company}
                 </p>
 
                 <p className="text-dark/70 dark:text-white/70 font-sans text-sm leading-relaxed mb-4">
-                    {item.description}
+                    {description}
                 </p>
 
                 {/* Acordeón de logros */}
-                {item.achievements && item.achievements.length > 0 && (
+                {achievements.length > 0 && (
                     <div className="mt-4">
                         <button
                             onClick={() => setOpen(v => !v)}
                             className="flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary/70 transition-colors"
                         >
-                            {open ? 'Ocultar logros' : `Ver logros destacados (${item.achievements.length})`}
+                            {open ? t('hideAchievements') : `${t('showAchievements')} (${achievements.length})`}
                             <ChevronDown size={12} className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
                         </button>
 
                         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${open ? 'max-h-[600px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
                             <ul className="list-disc list-inside space-y-2 pl-1 [&>li::marker]:text-primary">
-                                {item.achievements.map((a, i) => (
+                                {achievements.map((a, i) => (
                                     <li key={i} className="text-sm text-dark/65 dark:text-white/65 leading-relaxed">
                                         {a}
                                     </li>
@@ -123,12 +140,12 @@ function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean 
                 {/* Tech Stack for Jobs */}
                 {item.tech && (
                     <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100/50 dark:border-white/10 mt-4">
-                        {item.tech.map(t => {
-                            const IconComponent = getTechIcon(t);
+                        {item.tech.map(techName => {
+                            const IconComponent = getTechIcon(techName);
                             return (
-                                <span key={t} className="text-[10px] font-bold text-dark/60 dark:text-white/60 bg-white dark:bg-white/10 px-2 py-1 rounded-md border border-gray-100 dark:border-white/20 flex items-center gap-1.5">
+                                <span key={techName} className="text-[10px] font-bold text-dark/60 dark:text-white/60 bg-white dark:bg-white/10 px-2 py-1 rounded-md border border-gray-100 dark:border-white/20 flex items-center gap-1.5">
                                     {IconComponent && <IconComponent size={12} />}
-                                    {t}
+                                    {techName}
                                 </span>
                             );
                         })}
@@ -141,6 +158,8 @@ function ExperienceCard({ item, isLeft }: { item: TimelineItem; isLeft: boolean 
 }
 
 export default function Experience() {
+    const t = useTranslations('Experience');
+
     return (
         <section id="experience" className="py-24 px-6 bg-transparent relative">
             <div className="max-w-6xl mx-auto">
@@ -148,11 +167,11 @@ export default function Experience() {
                 {/* Header */}
                 <div className="mb-20 text-center">
                     <h2 className="font-display text-4xl font-bold text-dark dark:text-white mb-4">
-                        {EXPERIENCE_TEXT.title} <span className="text-alert decoration-wavy underline decoration-2">{EXPERIENCE_TEXT.titleHighlight}</span>
+                        {t('title')} <span className="text-alert decoration-wavy underline decoration-2">{t('titleHighlight')}</span>
                     </h2>
                     <div className="flex justify-center gap-6 text-sm font-medium text-dark/60 dark:text-white/60">
-                        <div className="flex items-center gap-2"><div className="w-3 h-3 bg-accent rounded-full"></div>{EXPERIENCE_TEXT.legendEducation}</div>
-                        <div className="flex items-center gap-2"><div className="w-3 h-3 bg-secondary rounded-full"></div>{EXPERIENCE_TEXT.legendWork}</div>
+                        <div className="flex items-center gap-2"><div className="w-3 h-3 bg-accent rounded-full"></div>{t('legendEducation')}</div>
+                        <div className="flex items-center gap-2"><div className="w-3 h-3 bg-secondary rounded-full"></div>{t('legendWork')}</div>
                     </div>
                 </div>
 
@@ -162,8 +181,7 @@ export default function Experience() {
                     <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-dark/10 via-dark/20 to-transparent dark:from-white/10 dark:via-white/20 dark:to-transparent transform md:-translate-x-1/2"></div>
 
                     <div className="space-y-12">
-                        {TIMELINE_DATA.map((item, index) => {
-                            // Zigzag invertido: ahora empieza por la derecha
+                        {TIMELINE_CONFIG.map((item, index) => {
                             const isLeft = index % 2 !== 0;
 
                             return (
@@ -189,7 +207,7 @@ export default function Experience() {
                     {/* End cap */}
                     <div className="absolute left-4 md:left-1/2 bottom-0 transform -translate-x-1/2 translate-y-full pt-12">
                         <div className="px-4 py-1 bg-white/50 dark:bg-white/10 backdrop-blur-sm text-gray-400 dark:text-gray-500 text-xs font-mono rounded-full border border-white/50 dark:border-white/20">
-                            {EXPERIENCE_TEXT.endLabel}
+                            {t('endLabel')}
                         </div>
                     </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { TechCard } from '../../types';
-import { CORE_STACK, SECONDARY_STACK, SKILLS_TEXT } from '../../constants';
+import { useTranslations } from 'next-intl';
+import { CORE_SKILLS, SECONDARY_SKILL_IDS, CoreSkillConfig, SecondarySkillId } from '../config/skills';
 import {
     PHP,
     MySQL,
@@ -31,7 +31,9 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string; size?: 
     bootstrap: Bootstrap5
 };
 
-function Card({ card }: { card: TechCard }) {
+function Card({ config }: { config: CoreSkillConfig }) {
+    const t = useTranslations('Skills');
+
     const typeStyles = {
         backend: {
             border: 'border-primary',
@@ -59,8 +61,13 @@ function Card({ card }: { card: TechCard }) {
         }
     };
 
-    const style = typeStyles[card.type] || typeStyles.backend;
-    const IconComponent = ICON_MAP[card.id];
+    const style = typeStyles[config.type] || typeStyles.backend;
+    const IconComponent = ICON_MAP[config.id];
+
+    const name = t(`core.${config.id}.name`);
+    const role = t(`core.${config.id}.role`);
+    const description = t(`core.${config.id}.description`);
+    const experience = t(`core.${config.id}.experience`);
 
     return (
         <div className={`bg-white/70 dark:bg-white/10 backdrop-blur-md rounded-3xl p-6 border-2 ${style.border} ${style.shadow} shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col h-full`}>
@@ -71,25 +78,25 @@ function Card({ card }: { card: TechCard }) {
                     {IconComponent ? (
                         <IconComponent size={32} />
                     ) : (
-                        <span className="font-bold text-xs">{card.name}</span>
+                        <span className="font-bold text-xs">{name}</span>
                     )}
                 </div>
             </div>
 
-            <h3 className="font-display font-bold text-xl text-dark dark:text-white mb-1">{card.name}</h3>
-            <p className="text-xs text-dark/50 dark:text-white/50 font-bold uppercase mb-4 tracking-wide">{card.role}</p>
+            <h3 className="font-display font-bold text-xl text-dark dark:text-white mb-1">{name}</h3>
+            <p className="text-xs text-dark/50 dark:text-white/50 font-bold uppercase mb-4 tracking-wide">{role}</p>
 
             {/* Description with min-height for visual alignment */}
             <p className="text-sm text-dark/80 dark:text-white/80 font-medium font-sans leading-relaxed mb-6 min-h-[60px]">
-                {card.description}
+                {description}
             </p>
 
             {/* Metric: Experience */}
             <div className="mt-auto pt-4 border-t border-gray-100/50 dark:border-white/10">
                 <div className="flex justify-between items-end lg:flex-col lg:items-start lg:gap-1">
-                    <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{SKILLS_TEXT.experienceLabel}</span>
+                    <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{t('experienceLabel')}</span>
                     <span className={`font-mono font-bold text-base ${style.text}`}>
-                        {card.experience}
+                        {experience}
                     </span>
                 </div>
             </div>
@@ -98,8 +105,10 @@ function Card({ card }: { card: TechCard }) {
     );
 }
 
-function SecondaryPill({ id, name }: { id: string; name: string }) {
+function SecondaryPill({ id }: { id: SecondarySkillId }) {
+    const t = useTranslations('Skills');
     const IconComponent = ICON_MAP[id];
+    const name = t(`secondary.${id}`);
 
     return (
         <div className="group flex items-center gap-3 px-4 py-3 bg-white/60 dark:bg-white/10 backdrop-blur-sm border border-gray-200/60 dark:border-white/20 rounded-xl hover:border-primary/30 hover:bg-white dark:hover:bg-white/20 hover:shadow-md transition-all duration-300">
@@ -114,6 +123,8 @@ function SecondaryPill({ id, name }: { id: string; name: string }) {
 }
 
 export default function Skills() {
+    const t = useTranslations('Skills');
+
     return (
         <section className="py-24 px-6 bg-transparent overflow-hidden relative">
             <div className="max-w-6xl mx-auto">
@@ -122,23 +133,23 @@ export default function Skills() {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                     <div>
                         <h2 className="font-display text-4xl font-bold text-dark dark:text-white mb-2">
-                            {SKILLS_TEXT.title}
+                            {t('title')}
                         </h2>
                         <p className="text-dark/70 dark:text-white/70 font-medium text-lg">
-                            {SKILLS_TEXT.subtitle}
+                            {t('subtitle')}
                         </p>
                     </div>
                     <div className="hidden md:block text-right">
                         <div className="inline-block bg-dark dark:bg-white/10 text-white px-4 py-2 rounded-lg font-mono text-sm transform -rotate-2 shadow-lg">
-                            {SKILLS_TEXT.badge}
+                            {t('badge')}
                         </div>
                     </div>
                 </div>
 
                 {/* PRIMARY GRID (CORE) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16">
-                    {CORE_STACK.map(tech => (
-                        <Card key={tech.id} card={tech} />
+                    {CORE_SKILLS.map(config => (
+                        <Card key={config.id} config={config} />
                     ))}
                 </div>
 
@@ -148,12 +159,12 @@ export default function Skills() {
                 {/* SECONDARY SECTION */}
                 <div className="flex flex-col items-center md:items-start">
                     <h3 className="text-sm font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-6">
-                        {SKILLS_TEXT.secondaryTitle}
+                        {t('secondaryTitle')}
                     </h3>
 
                     <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                        {SECONDARY_STACK.map(tech => (
-                            <SecondaryPill key={tech.id} id={tech.id} name={tech.name} />
+                        {SECONDARY_SKILL_IDS.map(id => (
+                            <SecondaryPill key={id} id={id} />
                         ))}
                     </div>
                 </div>
