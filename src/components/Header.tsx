@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Sun, Moon } from 'lucide-react'
 import { useTranslations } from 'next-intl';
 import { useTheme } from '../hooks/useTheme';
@@ -19,7 +19,8 @@ export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [sparks, setSparks] = useState<Spark[]>([]);
-    const requestRef = useRef<number>(0);
+    // requestAnimationFrame handle. null = loop parado (no hay sparks).
+    const requestRef = useRef<number | null>(null);
     const { isDark, toggleTheme, mounted } = useTheme();
     const t = useTranslations('Header');
 
@@ -27,28 +28,42 @@ export default function Header() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Animation Loop for Sparks
+    // Animation loop: solo corre mientras haya sparks vivos. Cuando el array
+    // queda vacío, se auto-detiene. Antes corría 60fps SIEMPRE aunque no
+    // hubiera nada que animar → matabas la batería/CPU.
+    const animate = useCallback(() => {
+        setSparks(prev => {
+            const next = prev
+                .map(spark => ({
+                    ...spark,
+                    x: spark.x + Math.cos(spark.angle) * spark.speed,
+                    y: spark.y + Math.sin(spark.angle) * spark.speed,
+                    speed: spark.speed * 0.95,
+                    size: spark.size * 0.95
+                }))
+                .filter(spark => spark.size > 0.5);
+
+            if (next.length > 0) {
+                requestRef.current = requestAnimationFrame(animate);
+            } else {
+                requestRef.current = null;
+            }
+            return next;
+        });
+    }, []);
+
+    // Cleanup del loop cuando el componente se desmonta
     useEffect(() => {
-        const animate = () => {
-            setSparks(prevSparks =>
-                prevSparks
-                    .map(spark => ({
-                        ...spark,
-                        x: spark.x + Math.cos(spark.angle) * spark.speed,
-                        y: spark.y + Math.sin(spark.angle) * spark.speed,
-                        speed: spark.speed * 0.95, // friction
-                        size: spark.size * 0.95 // fade out size
-                    }))
-                    .filter(spark => spark.size > 0.5)
-            );
-            requestRef.current = requestAnimationFrame(animate);
+        return () => {
+            if (requestRef.current !== null) {
+                cancelAnimationFrame(requestRef.current);
+                requestRef.current = null;
+            }
         };
-        requestRef.current = requestAnimationFrame(animate);
-        return () => cancelAnimationFrame(requestRef.current);
     }, []);
 
     const triggerExplosion = (e: React.MouseEvent) => {
@@ -68,6 +83,11 @@ export default function Header() {
         }));
 
         setSparks(prev => [...prev, ...newSparks]);
+
+        // Arranca el loop solo si no estaba corriendo
+        if (requestRef.current === null) {
+            requestRef.current = requestAnimationFrame(animate);
+        }
     };
 
     return (

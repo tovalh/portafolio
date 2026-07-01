@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import "../globals.css";
 import Header from '../../components/Header';
@@ -85,11 +85,24 @@ export default async function LocaleLayout({
     // Habilita rendering estático para este locale
     setRequestLocale(locale);
 
+    // Filtra los namespaces que se envían al cliente para hydration.
+    // Metadata y NotFound solo se usan en server components (metadata en
+    // el <head>, 404 en la página de error), así que no hace falta
+    // serializarlos en el HTML inicial. Reduce ~20% del JSON embedded.
+    const messages = await getMessages();
+    const {
+        Metadata: _metadata,
+        NotFound: _notFound,
+        ...clientMessages
+    } = messages as Record<string, unknown>;
+    void _metadata;
+    void _notFound;
+
     return (
         <html lang={locale}>
         <body
             className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={clientMessages}>
             {/* GLOBAL BACKGROUND BLOBS — heredados por todas las páginas del locale (incl. 404) */}
             <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-primary/20 rounded-full mix-blend-multiply filter blur-[100px] animate-blob opacity-70"></div>

@@ -1,22 +1,71 @@
 'use client'
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+interface TrailDot { x: number; y: number; id: number }
 
 export default function CustomCursor() {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([]);
-    const requestRef = useRef<number>(0);
+    const [position, setPosition] = useState({ x: -100, y: -100 });
+    const [trail, setTrail] = useState<TrailDot[]>([]);
+    // Si es touch device, ni siquiera renderizamos ni escuchamos eventos.
+    // Antes: el listener corría en TODO dispositivo y disparaba 2 setState
+    // por cada evento mousemove (~60/s), con re-render de hasta 16 divs.
+    const [isTouch, setIsTouch] = useState(false);
+
+    // Buffer para throttlear vía requestAnimationFrame: si el mouse se
+    // mueve 200 veces entre frames, procesamos solo la última posición.
+    const pendingPos = useRef<{ x: number; y: number } | null>(null);
+    const rafId = useRef<number | null>(null);
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setPosition({ x: e.clientX, y: e.clientY });
+        // Detectar dispositivos táctiles: si el usuario NO tiene hover fino,
+        // asumimos que no hay cursor real que decorar.
+        if (typeof window !== 'undefined') {
+            const mql = window.matchMedia('(hover: none), (pointer: coarse)');
+            if (mql.matches) {
+                setIsTouch(true);
+                return;
+            }
+        }
 
-            const newDot = { x: e.clientX, y: e.clientY, id: Date.now() };
-            setTrail((prev) => [...prev.slice(-15), newDot]);
+        const flush = () => {
+            const pos = pendingPos.current;
+            pendingPos.current = null;
+            if (!pos) {
+                rafId.current = null;
+                return;
+            }
+            setPosition(pos);
+            setTrail(prev => {
+                const next = prev.length >= 15 ? prev.slice(-14) : prev;
+                return [...next, { x: pos.x, y: pos.y, id: Date.now() }];
+            });
+            // Si llegó otra posición durante este frame, procesamos también
+            if (pendingPos.current) {
+                rafId.current = requestAnimationFrame(flush);
+            } else {
+                rafId.current = null;
+            }
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        const handleMouseMove = (e: MouseEvent) => {
+            pendingPos.current = { x: e.clientX, y: e.clientY };
+            if (rafId.current === null) {
+                rafId.current = requestAnimationFrame(flush);
+            }
+        };
+
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            if (rafId.current !== null) {
+                cancelAnimationFrame(rafId.current);
+                rafId.current = null;
+            }
+        };
     }, []);
+
+    // En touch no renderizamos NADA. Cero DOM extra en mobile.
+    if (isTouch) return null;
 
     return (
         <div className="pointer-events-none fixed inset-0 z-50 hidden md:block">
