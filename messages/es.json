@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "title": "Cristóbal Valladares — Full Stack Developer",
-    "description": "Full Stack Developer especializado en backend y bases de datos. Sistemas que aguantan presión real."
+    "title": "Cristóbal Valladares — Backend Developer",
+    "description": "Desarrollador backend especializado en bases de datos y sistemas robustos que aguantan presión real."
   },
   "Header": {
     "logo": "Toval",
@@ -22,7 +22,7 @@
     "headline": "Hago que las bases de datos",
     "headlineHighlight": "no exploten.",
     "headlineNote": "(todavía)",
-    "subtitle": "Full Stack Developer · Backend · Sistemas que aguantan presión",
+    "subtitle": "Backend Developer · PHP & Go · Sistemas que aguantan presión",
     "ctaPrimary": "Ver qué he construido",
     "ctaSecondary": "Hablemos",
     "downloadCV": "Descargar CV",
@@ -42,9 +42,9 @@
     "badgeText": "SYSADMIN MODE",
     "title": "Soy Cristóbal, pero todos me dicen",
     "titleHighlight": "Toval",
-    "paragraph1": "Desarrollador Full Stack con un foco en backend y bases de datos. Llevo más de un año y medio construyendo sistemas empresariales que manejan millones de registros sin pestañear, en una startup donde si algo se rompe, soy yo quien lo arregla.",
+    "paragraph1": "Desarrollador backend con foco en bases de datos y sistemas robustos. Llevo más de un año y medio construyendo sistemas empresariales que manejan millones de registros sin pestañear, en una startup donde si algo se rompe, soy yo quien lo arregla.",
     "paragraph2": "Me especializo en hacer que sistemas complejos funcionen bajo presión real: páginas respondiendo en menos de 2 segundos, arquitecturas multi-database, construcción de API entre países, y ese código legacy que nadie quiere tocar. Tengo la costumbre de dejar el código mejor de como lo encontré.",
-    "paragraph3": "Actualmente profundizando mis raíces en backend con Java y Spring Boot, consolidando buenas prácticas en PHP, y explorando sistemas embebidos como nuevo territorio técnico."
+    "paragraph3": "Actualmente construyendo microservicios en Go, consolidando buenas prácticas en PHP en el día a día, y metiéndome cada vez más en concurrencia y sistemas distribuidos: que las piezas hablen entre sí sin romperse."
   },
   "Experience": {
     "title": "Historial de",
@@ -107,12 +107,22 @@
     "badge": "CORE STACK",
     "secondaryTitle": "También trabajo con",
     "experienceLabel": "Experiencia",
+    "yearSingular": "año",
+    "yearPlural": "años",
+    "monthSingular": "mes",
+    "monthPlural": "meses",
     "core": {
       "php": {
         "name": "PHP",
         "role": "Backend Core",
         "description": "Robusto, tipado y moderno. La base de la mayoría de mis sistemas de producción.",
         "experience": "1.5 Años Prod."
+      },
+      "go": {
+        "name": "Go",
+        "role": "Microservicios",
+        "description": "Concurrencia real con goroutines y canales. Para microservicios que aguantan carga y conexiones abiertas.",
+        "experience": "Desde Ene 2026"
       },
       "mysql": {
         "name": "MySQL",
@@ -140,6 +150,7 @@
       }
     },
     "secondary": {
+      "git": "Git",
       "mariadb": "MariaDB",
       "postgresql": "PostgreSQL",
       "linux": "Linux",
@@ -181,6 +192,30 @@
         "description": "Algoritmos que encuentran el centavo perdido entre miles de transacciones bancarias. Magia negra, básicamente.",
         "status": "Matching Activo",
         "stats": "Auto-Match"
+      },
+      "laraVentas": {
+        "title": "LaraVentas · ERP SaaS",
+        "description": "Demo de un ERP multi-empresa: ventas, facturación y dashboard en vivo. Laravel + Inertia + Vue, con notificaciones realtime y monitor de salud propios.",
+        "status": "Multi-tenant",
+        "stats": "SaaS"
+      },
+      "finMail": {
+        "title": "FinMail",
+        "description": "Lee los correos del banco, parsea las transacciones y las categoriza con IA. Java + Spring Boot + Gemini, porque los bancos no tienen API abierta.",
+        "status": "IA · Gemini",
+        "stats": "Fintech"
+      },
+      "notifService": {
+        "title": "Notificaciones en Vivo",
+        "description": "Notificaciones realtime para todos los usuarios de una empresa, sin recargar la página. Go aguantando las conexiones abiertas y validando cada cliente con tokens firmados.",
+        "status": "WebSocket",
+        "stats": "Realtime"
+      },
+      "healthMonitor": {
+        "title": "Monitor de Salud",
+        "description": "Vigila los servicios y avisa a Telegram cuando algo se cae, con filtro de flapping para no gritar por cada parpadeo. El que se entera antes que el cliente.",
+        "status": "Uptime Watch",
+        "stats": "Alertas"
       }
     }
   },

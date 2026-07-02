@@ -1,0 +1,21 @@
+<svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">
+  <rect width="600" height="150" fill="#232631"/>
+
+  <!-- envelope -->
+  <rect x="34" y="50" width="72" height="48" rx="6" fill="none" stroke="#4361EE" opacity="0.75"/>
+  <path d="M38 55 L70 78 L102 55" fill="none" stroke="#4361EE" stroke-width="1.6" opacity="0.75"/>
+  <!-- arrow -->
+  <path d="M116 74 H150" fill="none" stroke="#4361EE" stroke-width="2" opacity="0.7"/>
+  <path d="M150 74 l-7 -4 v8 z" fill="#4361EE" opacity="0.9"/>
+  <!-- coin / transaction -->
+  <circle cx="176" cy="74" r="17" fill="none" stroke="#4361EE" opacity="0.85"/>
+  <text x="176" y="80" fill="#4361EE" font-size="17" font-weight="700" text-anchor="middle">$</text>
+
+  <!-- label -->
+  <text x="212" y="70" fill="#EAF0F0" font-size="23" font-weight="700">FinMail</text>
+  <text x="213" y="92" fill="#8b97a5" font-size="12.5">Java · Spring · Gemini</text>
+
+  <!-- tag -->
+  <rect x="452" y="18" width="130" height="26" rx="13" fill="#4361EE" opacity="0.16"/>
+  <text x="517" y="35" fill="#6f86ff" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1">FINTECH · IA</text>
+</svg>

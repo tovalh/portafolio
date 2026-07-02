@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { TIMELINE_CONFIG, TimelineConfigItem } from '../config/timeline';
 import {
     PHP,
+    Go,
     MySQL,
     JavaScript,
     Laravel,
@@ -27,6 +28,7 @@ const TECH_ICON_MAP: Record<string, React.ComponentType<{ className?: string; si
     aws: AWS,
     wordpress: WordPress,
     php: PHP,
+    go: Go,
     javascript: JavaScript,
     jquery: JQuery,
     git: Git,

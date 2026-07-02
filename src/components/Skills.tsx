@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import { CORE_SKILLS, SECONDARY_SKILL_IDS, CoreSkillConfig, SecondarySkillId } from '../config/skills';
 import {
     PHP,
+    Go,
     MySQL,
     Java,
     JavaScript,
@@ -18,6 +19,7 @@ import {
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
     php: PHP,
+    go: Go,
     mysql: MySQL,
     java: Java,
     javascript: JavaScript,
@@ -30,6 +32,20 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string; size?: 
     tailwind: TailwindCSS,
     bootstrap: Bootstrap5
 };
+
+// Calcula la experiencia desde 2 fechas (YYYY-MM), igual que el timeline.
+// Sin `end` = hasta hoy. Formato "X años Y meses".
+function formatExperience(start: string, end: string | undefined, yearS: string, yearP: string, monthS: string, monthP: string): string {
+    const s = new Date(`${start}-01`);
+    const e = end ? new Date(`${end}-01`) : new Date();
+    const months = (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
+    if (months < 1) return `1 ${monthS}`;
+    const years = Math.floor(months / 12);
+    const rem = months % 12;
+    const yPart = years > 0 ? `${years} ${years === 1 ? yearS : yearP}` : '';
+    const mPart = rem > 0 ? `${rem} ${rem === 1 ? monthS : monthP}` : '';
+    return [yPart, mPart].filter(Boolean).join(' ') || `1 ${monthS}`;
+}
 
 function Card({ config }: { config: CoreSkillConfig }) {
     const t = useTranslations('Skills');
@@ -67,7 +83,7 @@ function Card({ config }: { config: CoreSkillConfig }) {
     const name = t(`core.${config.id}.name`);
     const role = t(`core.${config.id}.role`);
     const description = t(`core.${config.id}.description`);
-    const experience = t(`core.${config.id}.experience`);
+    const experience = formatExperience(config.start, config.end, t('yearSingular'), t('yearPlural'), t('monthSingular'), t('monthPlural'));
 
     return (
         <div className={`bg-white/70 dark:bg-white/10 backdrop-blur-md rounded-3xl p-6 border-2 ${style.border} ${style.shadow} shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col h-full`}>

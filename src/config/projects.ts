@@ -3,39 +3,62 @@
 
 export interface ProjectConfig {
     id: number;
-    key: 'multiDb' | 'apiInternational' | 'accounting' | 'banking';
+    key: 'laraVentas' | 'notifService' | 'finMail' | 'healthMonitor';
     tags: string[];
     isPrivate: boolean;
     color: 'blue' | 'green' | 'orange' | 'red';
+    icon?: 'database' | 'cpu' | 'code' | 'wallet' | 'radio' | 'activity';
+    slug?: string;    // ruta del case study: /proyectos/{slug}
+    github?: string;
+    demo?: string;
+    thumb?: string;   // /thumbnails/x.svg
 }
 
 export const PROJECTS_CONFIG: ProjectConfig[] = [
     {
         id: 1,
-        key: 'multiDb',
-        tags: ['Java', 'Spring Boot', 'MySQL', 'PostgreSQL'],
-        isPrivate: true,
-        color: 'blue'
+        key: 'laraVentas',
+        tags: ['Laravel', 'Inertia', 'Vue', 'MySQL', 'PHP'],
+        isPrivate: false,
+        color: 'orange',
+        icon: 'database',
+        slug: 'laraventas',
+        github: 'https://github.com/tovalh/LaraVentas', // TODO: verificar nombre del repo
+        demo: 'https://laraventas-production.up.railway.app',
+        thumb: '/thumbnails/laraventas.svg'
     },
     {
         id: 2,
-        key: 'apiInternational',
-        tags: ['Node.js', 'Express', 'MongoDB', 'Redis'],
+        key: 'notifService',
+        tags: ['Go', 'WebSocket', 'HMAC', 'MySQL', 'Docker'],
         isPrivate: false,
-        color: 'green'
+        color: 'green',
+        icon: 'radio',
+        slug: 'notif-service',
+        github: 'https://github.com/tovalh/notif_service', // TODO: verificar nombre del repo
+        demo: 'https://laraventas-production.up.railway.app',
+        thumb: '/thumbnails/notif_service.svg'
     },
     {
         id: 3,
-        key: 'accounting',
-        tags: ['PHP', 'Laravel', 'Oracle'],
-        isPrivate: true,
-        color: 'orange'
+        key: 'finMail',
+        tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Gmail API', 'Gemini'],
+        isPrivate: false,
+        color: 'blue',
+        icon: 'code',
+        slug: 'finmail',
+        github: 'https://github.com/tovalh/finmail', // TODO: verificar nombre del repo
+        thumb: '/thumbnails/finmail.svg'
     },
     {
         id: 4,
-        key: 'banking',
-        tags: ['Python', 'Pandas', 'React'],
-        isPrivate: true,
-        color: 'red'
+        key: 'healthMonitor',
+        tags: ['Go', 'Telegram', 'SMTP', 'Docker', 'Concurrency'],
+        isPrivate: false,
+        color: 'red',
+        icon: 'activity',
+        slug: 'health-status',
+        github: 'https://github.com/tovalh/health_status', // TODO: verificar nombre del repo
+        thumb: '/thumbnails/health_status.svg'
     }
 ];

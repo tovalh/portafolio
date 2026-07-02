@@ -1,195 +1,142 @@
 'use client'
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import useEmblaCarousel from 'embla-carousel-react';
+import { Link } from '../i18n/navigation';
 import { PROJECTS_CONFIG, ProjectConfig } from '../config/projects';
-import { Lock, Github, ArrowRight, Database, Cpu, Code2, ChevronRight, ChevronLeft, Wallet } from 'lucide-react';
+import TechTag from './TechTag';
+import {
+    Lock, Github, ArrowRight, ExternalLink,
+    Database, Cpu, Code2, Wallet, Radio, Activity,
+    ChevronRight, ChevronLeft
+} from 'lucide-react';
 
 const colorStyles = {
-    blue: {
-        iconBg: 'bg-secondary/10',
-        iconText: 'text-secondary',
-        statsBg: 'bg-secondary/10 border-secondary/30',
-        statsText: 'text-secondary',
-        bar: 'bg-secondary'
-    },
-    green: {
-        iconBg: 'bg-accent/10',
-        iconText: 'text-accent',
-        statsBg: 'bg-accent/10 border-accent/30',
-        statsText: 'text-accent',
-        bar: 'bg-accent'
-    },
-    orange: {
-        iconBg: 'bg-primary/10',
-        iconText: 'text-primary',
-        statsBg: 'bg-primary/10 border-primary/30',
-        statsText: 'text-primary',
-        bar: 'bg-primary'
-    },
-    red: {
-        iconBg: 'bg-alert/10',
-        iconText: 'text-alert',
-        statsBg: 'bg-alert/10 border-alert/30',
-        statsText: 'text-alert',
-        bar: 'bg-alert'
-    }
+    blue:   { iconBg: 'bg-secondary/10', iconText: 'text-secondary', statsBg: 'bg-secondary/10 border-secondary/30', statsText: 'text-secondary', bar: 'bg-secondary' },
+    green:  { iconBg: 'bg-accent/10',    iconText: 'text-accent',    statsBg: 'bg-accent/10 border-accent/30',       statsText: 'text-accent',    bar: 'bg-accent' },
+    orange: { iconBg: 'bg-primary/10',   iconText: 'text-primary',   statsBg: 'bg-primary/10 border-primary/30',     statsText: 'text-primary',   bar: 'bg-primary' },
+    red:    { iconBg: 'bg-alert/10',     iconText: 'text-alert',     statsBg: 'bg-alert/10 border-alert/30',         statsText: 'text-alert',     bar: 'bg-alert' },
 };
 
-const iconMap = {
-    orange: Database,
-    blue: Cpu,
-    red: Wallet,
-    green: Code2
-};
+const iconByName = { database: Database, cpu: Cpu, code: Code2, wallet: Wallet, radio: Radio, activity: Activity };
+const iconByColor = { blue: Cpu, green: Code2, orange: Database, red: Wallet };
 
-function getSlideConfig(index: number, activeIndex: number, total: number) {
-    let dist = (index - activeIndex + total) % total;
-    if (dist > total / 2) dist -= total;
-
-    let zIndex = 10;
-    let opacity = 0;
-    let scale = 0.8;
-    let translateX = '0%';
-    let blur = 'blur(4px)';
-    let pointerEvents = 'none';
-
-    if (dist === 0) {
-        zIndex = 30;
-        opacity = 1;
-        scale = 1;
-        translateX = '0%';
-        blur = 'blur(0px)';
-        pointerEvents = 'auto';
-    } else if (dist === -1) {
-        zIndex = 20;
-        opacity = 0.6;
-        scale = 0.85;
-        translateX = '-60%';
-        blur = 'blur(2px)';
-        pointerEvents = 'auto';
-    } else if (dist === 1) {
-        zIndex = 20;
-        opacity = 0.6;
-        scale = 0.85;
-        translateX = '60%';
-        blur = 'blur(2px)';
-        pointerEvents = 'auto';
-    }
-
-    return { zIndex, opacity, scale, translateX, blur, pointerEvents, dist };
-}
-
-function ProjectSlide({
-                          project,
-                          config,
-                          onClick
-                      }: {
-    project: ProjectConfig;
-    config: ReturnType<typeof getSlideConfig>;
-    onClick: () => void;
-}) {
+function ProjectCard({ project }: { project: ProjectConfig }) {
     const t = useTranslations('Projects');
     const styles = colorStyles[project.color];
-    const IconComponent = iconMap[project.color];
-
-    const title = t(`items.${project.key}.title`);
-    const description = t(`items.${project.key}.description`);
-    const status = t(`items.${project.key}.status`);
-    const stats = t(`items.${project.key}.stats`);
+    const IconComponent = project.icon ? iconByName[project.icon] : iconByColor[project.color];
 
     return (
-        <div
-            onClick={() => config.dist !== 0 && onClick()}
-            className="absolute top-1/2 left-1/2 w-[85vw] md:w-[600px] h-auto min-h-[420px] bg-white/90 dark:bg-white/10 backdrop-blur-md rounded-3xl border-2 border-gray-100 dark:border-white/20 shadow-2xl p-8 flex flex-col transition-all duration-500 ease-out cursor-pointer overflow-hidden"
-            style={{
-                transform: `translate(-50%, -50%) translateX(${config.translateX}) scale(${config.scale})`,
-                zIndex: config.zIndex,
-                opacity: config.opacity,
-                filter: config.blur,
-                pointerEvents: config.pointerEvents as React.CSSProperties['pointerEvents'],
-            }}
-        >
-            {/* Card Header */}
-            <div className="flex justify-between items-start mb-6">
-                <div className={`p-3 rounded-xl ${styles.iconBg} ${styles.iconText}`}>
-                    <IconComponent size={24} />
+        <div className="relative h-full bg-white/90 dark:bg-white/10 backdrop-blur-md rounded-3xl border-2 border-gray-100 dark:border-white/20 shadow-xl flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+
+            {/* Thumbnail (solo si el proyecto lo define) */}
+            {project.thumb && (
+                <div className="w-full h-36 bg-dark overflow-hidden border-b border-white/10">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={project.thumb} alt={t(`items.${project.key}.title`)} className="w-full h-full object-cover" />
                 </div>
+            )}
 
-                <div className="flex items-center gap-3">
-                    <div className="px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/20 text-xs font-mono font-bold text-gray-500 dark:text-gray-400">
-                        {status.toUpperCase()}
+            <div className="p-7 flex flex-col flex-grow">
+                {/* Header */}
+                <div className="flex justify-between items-start mb-5">
+                    <div className={`p-3 rounded-xl ${styles.iconBg} ${styles.iconText}`}>
+                        <IconComponent size={22} />
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${styles.statsBg} ${styles.statsText}`}>
-                        {stats}
-                    </div>
-                </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="flex-grow">
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-dark dark:text-white mb-4">
-                    {title}
-                </h3>
-                <p className="text-dark/70 dark:text-white/70 leading-relaxed font-sans mb-6 text-sm md:text-base">
-                    {description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tags.map(tag => (
-                        <span key={tag} className="px-3 py-1 bg-gray-50 dark:bg-white/10 rounded-md text-xs text-gray-500 dark:text-gray-400 font-medium border border-gray-100 dark:border-white/20">
-                            #{tag}
+                    <div className="flex items-center gap-2">
+                        <span className="px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/20 text-[11px] font-mono font-bold text-gray-500 dark:text-gray-400">
+                            {t(`items.${project.key}.status`).toUpperCase()}
                         </span>
-                    ))}
+                        <span className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold border ${styles.statsBg} ${styles.statsText}`}>
+                            {t(`items.${project.key}.stats`)}
+                        </span>
+                    </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-grow">
+                    <h3 className="text-xl md:text-2xl font-display font-bold text-dark dark:text-white mb-3">
+                        {t(`items.${project.key}.title`)}
+                    </h3>
+                    <p className="text-dark/70 dark:text-white/70 leading-relaxed font-sans mb-5 text-sm">
+                        {t(`items.${project.key}.description`)}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                        {project.tags.map(tag => <TechTag key={tag} label={tag} />)}
+                    </div>
+                </div>
+
+                {/* Footer */}
+                <div className="pt-5 border-t border-gray-100 dark:border-white/10 flex justify-between items-center">
+                    {project.isPrivate ? (
+                        <span className="flex items-center gap-2 text-gray-400 text-sm font-medium">
+                            <Lock size={16} /> {t('privateLabel')}
+                        </span>
+                    ) : project.github ? (
+                        <a href={project.github} target="_blank" rel="noopener noreferrer"
+                           className="flex items-center gap-2 text-dark dark:text-white hover:text-primary font-medium text-sm transition-colors">
+                            <Github size={18} /> {t('viewCode')}
+                        </a>
+                    ) : <span />}
+
+                    {project.slug ? (
+                        <Link href={`/proyectos/${project.slug}`}
+                              className="flex items-center gap-2 text-primary font-bold text-sm hover:underline decoration-2 underline-offset-4 group/btn">
+                            {t('viewDetails')} <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                        </Link>
+                    ) : project.demo ? (
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                           className="flex items-center gap-2 text-primary font-bold text-sm hover:underline decoration-2 underline-offset-4">
+                            {t('viewDetails')} <ExternalLink size={15} />
+                        </a>
+                    ) : (
+                        <span className="flex items-center gap-2 text-gray-400 font-bold text-sm">
+                            {t('viewDetails')} <ArrowRight size={16} />
+                        </span>
+                    )}
                 </div>
             </div>
 
-            {/* Footer / Actions */}
-            <div className="pt-6 border-t border-gray-100 dark:border-white/10 flex justify-between items-center">
-                {project.isPrivate ? (
-                    <div className="flex items-center gap-2 text-gray-400 text-sm font-medium">
-                        <Lock size={16} />
-                        <span>{t('privateLabel')}</span>
-                    </div>
-                ) : (
-                    <a href="#" className="flex items-center gap-2 text-dark dark:text-white hover:text-primary font-medium text-sm transition-colors group/git">
-                        <Github size={18} />
-                        <span>{t('viewCode')}</span>
-                    </a>
-                )}
-
-                <button className="flex items-center gap-2 text-primary font-bold text-sm hover:underline decoration-2 underline-offset-4 group/btn">
-                    {t('viewDetails')} <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                </button>
-            </div>
-
-            {/* Highlight Bar */}
-            <div className={`absolute bottom-0 left-0 w-full h-1.5 rounded-b-3xl ${styles.bar}`}></div>
+            {/* Barra inferior de color */}
+            <div className={`h-1.5 w-full ${styles.bar}`} />
         </div>
     );
 }
 
 export default function Projects() {
     const t = useTranslations('Projects');
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', loop: true, slidesToScroll: 1 });
 
-    const nextSlide = () => {
-        setActiveIndex((prev) => (prev + 1) % PROJECTS_CONFIG.length);
-    };
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+    const [canPrev, setCanPrev] = useState(false);
+    const [canNext, setCanNext] = useState(true);
 
-    const prevSlide = () => {
-        setActiveIndex((prev) => (prev - 1 + PROJECTS_CONFIG.length) % PROJECTS_CONFIG.length);
-    };
+    const onSelect = useCallback(() => {
+        if (!emblaApi) return;
+        setSelectedIndex(emblaApi.selectedScrollSnap());
+        setCanPrev(emblaApi.canScrollPrev());
+        setCanNext(emblaApi.canScrollNext());
+    }, [emblaApi]);
 
-    const setSlide = (index: number) => {
-        setActiveIndex(index);
-    };
+    useEffect(() => {
+        if (!emblaApi) return;
+        setScrollSnaps(emblaApi.scrollSnapList());
+        onSelect();
+        emblaApi.on('select', onSelect);
+        emblaApi.on('reInit', onSelect);
+    }, [emblaApi, onSelect]);
+
+    const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+    const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+    const scrollTo = useCallback((i: number) => emblaApi?.scrollTo(i), [emblaApi]);
 
     return (
         <section id="projects" className="py-24 px-4 bg-transparent overflow-hidden">
-            <div className="max-w-7xl mx-auto flex flex-col items-center">
+            <div className="max-w-7xl mx-auto">
 
                 {/* Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-14">
                     <h2 className="font-display text-4xl md:text-5xl font-bold text-dark dark:text-white mb-4">
                         {t('title')}
                     </h2>
@@ -198,56 +145,47 @@ export default function Projects() {
                     </p>
                 </div>
 
-                {/* Carousel Container */}
-                <div className="relative w-full h-[520px] md:h-[480px] flex items-center justify-center">
-
-                    {/* Navigation Buttons (Desktop) */}
-                    <button
-                        onClick={prevSlide}
-                        className="absolute left-4 md:left-10 z-40 p-3 rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/50 dark:border-white/20 hover:bg-primary hover:text-white transition-all group hidden md:block"
-                    >
-                        <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
-                    </button>
-                    <button
-                        onClick={nextSlide}
-                        className="absolute right-4 md:right-10 z-40 p-3 rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/50 dark:border-white/20 hover:bg-primary hover:text-white transition-all group hidden md:block"
-                    >
-                        <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
-
-                    {/* Slides Area */}
-                    <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
-                        {PROJECTS_CONFIG.map((project, index) => {
-                            const config = getSlideConfig(index, activeIndex, PROJECTS_CONFIG.length);
-                            if (Math.abs(config.dist) > 1 && config.opacity === 0) return null;
-
-                            return (
-                                <ProjectSlide
-                                    key={project.id}
-                                    project={project}
-                                    config={config}
-                                    onClick={() => setSlide(index)}
-                                />
-                            );
-                        })}
+                {/* Carousel */}
+                <div className="relative">
+                    <div className="overflow-hidden" ref={emblaRef}>
+                        <div className="flex -ml-6">
+                            {PROJECTS_CONFIG.map(project => (
+                                <div key={project.id} className="pl-6 min-w-0 flex-[0_0_100%] md:flex-[0_0_50%]">
+                                    <ProjectCard project={project} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Pagination Indicators */}
-                    <div className="absolute bottom-[-40px] flex gap-3">
-                        {PROJECTS_CONFIG.map((_, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => setSlide(idx)}
-                                className={`h-2 rounded-full transition-all duration-300
-                                    ${idx === activeIndex
-                                    ? 'w-8 bg-primary'
-                                    : 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-primary/50'}
-                                `}
-                                aria-label={`${t('goToProject')} ${idx + 1}`}
-                            />
-                        ))}
-                    </div>
+                    {/* Prev / Next */}
+                    <button
+                        onClick={scrollPrev}
+                        disabled={!canPrev}
+                        aria-label={t('goToProject')}
+                        className="absolute top-1/2 -left-2 md:-left-5 -translate-y-1/2 z-10 p-3 rounded-full bg-white/90 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/50 dark:border-white/20 hover:bg-primary hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
+                    >
+                        <ChevronLeft size={22} className="group-hover:-translate-x-0.5 transition-transform" />
+                    </button>
+                    <button
+                        onClick={scrollNext}
+                        disabled={!canNext}
+                        aria-label={t('goToProject')}
+                        className="absolute top-1/2 -right-2 md:-right-5 -translate-y-1/2 z-10 p-3 rounded-full bg-white/90 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/50 dark:border-white/20 hover:bg-primary hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
+                    >
+                        <ChevronRight size={22} className="group-hover:translate-x-0.5 transition-transform" />
+                    </button>
+                </div>
 
+                {/* Dots */}
+                <div className="flex justify-center gap-3 mt-10">
+                    {scrollSnaps.map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => scrollTo(idx)}
+                            aria-label={`${t('goToProject')} ${idx + 1}`}
+                            className={`h-2 rounded-full transition-all duration-300 ${idx === selectedIndex ? 'w-8 bg-primary' : 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-primary/50'}`}
+                        />
+                    ))}
                 </div>
             </div>
         </section>

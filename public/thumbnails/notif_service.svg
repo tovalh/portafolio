@@ -1,0 +1,17 @@
+<svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">
+  <rect width="600" height="150" fill="#232631"/>
+
+  <!-- broadcast ripples -->
+  <circle cx="86" cy="75" r="46" fill="none" stroke="#2EC4B6" stroke-width="2" opacity="0.22"/>
+  <circle cx="86" cy="75" r="31" fill="none" stroke="#2EC4B6" stroke-width="2" opacity="0.45"/>
+  <circle cx="86" cy="75" r="17" fill="none" stroke="#2EC4B6" stroke-width="2" opacity="0.8"/>
+  <circle cx="86" cy="75" r="5.5" fill="#2EC4B6"/>
+
+  <!-- label -->
+  <text x="150" y="70" fill="#EAF0F0" font-size="23" font-weight="700">notif_service</text>
+  <text x="151" y="92" fill="#8b97a5" font-size="12.5">Go · WebSocket · realtime</text>
+
+  <!-- tag -->
+  <rect x="454" y="18" width="128" height="26" rx="13" fill="#2EC4B6" opacity="0.14"/>
+  <text x="518" y="35" fill="#2EC4B6" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1">REALTIME</text>
+</svg>

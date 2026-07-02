@@ -20,7 +20,7 @@ export const TIMELINE_CONFIG: TimelineConfigItem[] = [
         startDate: '2024-11',
         type: 'work',
         highlight: true,
-        tech: ['PHP', 'JavaScript', 'JQuery', 'Git', 'Bootstrap', 'MySQL', 'MariaDB'],
+        tech: ['PHP', 'Go', 'JavaScript', 'JQuery', 'Git', 'Bootstrap', 'MySQL', 'MariaDB'],
         hasAchievements: true,
         achievementsCount: 8
     },

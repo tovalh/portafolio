@@ -1,0 +1,18 @@
+<svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">
+  <rect width="600" height="150" fill="#232631"/>
+
+  <!-- heartbeat: healthy (teal) -->
+  <polyline points="34,70 150,70 165,42 180,100 195,70 300,70 315,46 330,96 345,70 430,70"
+            fill="none" stroke="#2EC4B6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- flatline: down (red) -->
+  <polyline points="430,70 560,70" fill="none" stroke="#FF5A5A" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="560" cy="70" r="5" fill="#FF5A5A"/>
+
+  <!-- label -->
+  <text x="34" y="128" fill="#EAF0F0" font-size="21" font-weight="700">health_status</text>
+  <text x="250" y="128" fill="#8b97a5" font-size="12.5">Go · monitor · alerts</text>
+
+  <!-- tag -->
+  <rect x="438" y="16" width="148" height="26" rx="13" fill="#FF5A5A" opacity="0.14"/>
+  <text x="512" y="33" fill="#FF5A5A" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">OBSERVABILITY</text>
+</svg>

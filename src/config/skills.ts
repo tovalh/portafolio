@@ -4,19 +4,24 @@
 export type SkillType = 'backend' | 'database' | 'frontend' | 'learning';
 
 export interface CoreSkillConfig {
-    id: 'php' | 'mysql' | 'java' | 'javascript' | 'git';
+    id: 'php' | 'go' | 'mysql' | 'java' | 'javascript';
     type: SkillType;
+    // La experiencia se calcula desde estas fechas (formato YYYY-MM, igual que
+    // el timeline). Sin `end` = hasta hoy (se actualiza solo).
+    start: string;
+    end?: string;
 }
 
 export const CORE_SKILLS: CoreSkillConfig[] = [
-    { id: 'php', type: 'backend' },
-    { id: 'mysql', type: 'database' },
-    { id: 'java', type: 'backend' },
-    { id: 'javascript', type: 'frontend' },
-    { id: 'git', type: 'backend' }
+    { id: 'php', type: 'backend', start: '2024-11' },        // desde Kudos → hoy
+    { id: 'go', type: 'backend', start: '2026-01' },         // desde ene 2026 → hoy
+    { id: 'mysql', type: 'database', start: '2024-11' },     // desde Kudos → hoy
+    { id: 'java', type: 'backend', start: '2024-07', end: '2024-11' }, // Marcela Paz
+    { id: 'javascript', type: 'frontend', start: '2024-11' } // desde Kudos → hoy
 ];
 
 export const SECONDARY_SKILL_IDS = [
+    'git',
     'mariadb',
     'postgresql',
     'linux',
