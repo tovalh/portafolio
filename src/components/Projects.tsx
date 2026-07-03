@@ -29,11 +29,12 @@ function ProjectCard({ project }: { project: ProjectConfig }) {
     return (
         <div className="relative h-full bg-white/90 dark:bg-white/10 backdrop-blur-md rounded-3xl border-2 border-gray-100 dark:border-white/20 shadow-xl flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
 
-            {/* Thumbnail (solo si el proyecto lo define) */}
+            {/* Thumbnail (solo si el proyecto lo define). Aspect natural del SVG:
+                se ve completo y escala con el ancho, sin recortes en móvil. */}
             {project.thumb && (
-                <div className="w-full h-36 bg-dark overflow-hidden border-b border-white/10">
+                <div className="w-full bg-[#232631] border-b border-white/10">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={project.thumb} alt={t(`items.${project.key}.title`)} className="w-full h-full object-cover" />
+                    <img src={project.thumb} alt={t(`items.${project.key}.title`)} className="block w-full" />
                 </div>
             )}
 

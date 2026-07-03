@@ -29,6 +29,7 @@ interface CaseContent {
     decisions: Decision[];
     proofTitle: string;
     proofCaption: string;
+    media?: { src: string; caption: string }[]; // videos con su pie; vacío = placeholder
     backLabel: string;
 }
 
@@ -101,7 +102,12 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
                 { title: 'Un canal por empresa', detail: 'Cada usuario recibe solo lo suyo; el aislamiento vive en el hub, no en cada mensaje.' },
             ],
             proofTitle: 'En vivo',
-            proofCaption: 'Dos ventanas del ERP: al crear una factura en una, la notificación aparece al instante en la otra.',
+            proofCaption: 'El realtime en acción: conexiones por empresa, un envío de prueba y un caso real.',
+            media: [
+                { src: '/videos/notif_service_gif1.mp4', caption: 'Un cliente se conecta como Empresa A, se desconecta y se reconecta como Empresa B — en los logs se ven las distintas conexiones abriéndose.' },
+                { src: '/videos/notif_service_gif2.mp4', caption: 'Notificación de prueba enviada en vivo, con los logs del servicio mostrando el push.' },
+                { src: '/videos/notif_service_gif3.mp4', caption: 'Caso real: al crear una venta, la notificación llega al instante al usuario.' },
+            ],
             backLabel: 'Volver a proyectos',
         },
         en: {
@@ -123,7 +129,12 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
                 { title: 'One channel per company', detail: 'Each user only receives its own events; isolation lives in the hub, not in every message.' },
             ],
             proofTitle: 'Live',
-            proofCaption: 'Two ERP windows: create an invoice in one, the notification pops instantly in the other.',
+            proofCaption: 'Realtime in action: per-company connections, a test push and a real case.',
+            media: [
+                { src: '/videos/notif_service_gif1.mp4', caption: 'A client connects as Company A, disconnects and reconnects as Company B — the logs show the different connections opening.' },
+                { src: '/videos/notif_service_gif2.mp4', caption: 'A live test notification sent, with the service logs showing the push.' },
+                { src: '/videos/notif_service_gif3.mp4', caption: 'Real case: creating a sale delivers the notification to the user instantly.' },
+            ],
             backLabel: 'Back to projects',
         },
     },
@@ -193,7 +204,12 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
                 { title: 'Notifiers detrás de una interfaz de un método', detail: 'Agregar Telegram, email o webhook nunca toca el monitor: cada canal es un archivo aparte.' },
             ],
             proofTitle: 'En vivo',
-            proofCaption: 'Alerta de caída y recuperación llegando a Telegram cuando un servicio cambia de estado.',
+            proofCaption: 'El monitor en acción: arranque, caída forzada y recuperación, con sus alertas a Telegram.',
+            media: [
+                { src: '/videos/micro_status_gif1.mp4', caption: 'El servicio arranca y envía el mensaje de "up".' },
+                { src: '/videos/micro_status_gif2.mp4', caption: 'Tiro abajo un servicio a propósito y llega la alerta de caída a Telegram.' },
+                { src: '/videos/micro_status_gif3.mp4', caption: 'El servicio se recupera y llega la alerta de recuperación.' },
+            ],
             backLabel: 'Volver a proyectos',
         },
         en: {
@@ -215,7 +231,12 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
                 { title: 'Notifiers behind a one-method interface', detail: 'Adding Telegram, email or webhook never touches the monitor: each channel is its own file.' },
             ],
             proofTitle: 'Live',
-            proofCaption: 'Down and recovery alert arriving on Telegram when a service changes state.',
+            proofCaption: 'The monitor in action: startup, a forced outage and recovery, with its Telegram alerts.',
+            media: [
+                { src: '/videos/micro_status_gif1.mp4', caption: 'The service starts up and sends the "up" message.' },
+                { src: '/videos/micro_status_gif2.mp4', caption: 'I take a service down on purpose and the outage alert arrives on Telegram.' },
+                { src: '/videos/micro_status_gif3.mp4', caption: 'The service recovers and the recovery alert arrives.' },
+            ],
             backLabel: 'Back to projects',
         },
     },
@@ -320,14 +341,31 @@ export default async function CaseStudyPage({
                     </div>
                 </section>
 
-                {/* Proof (GIF placeholder) */}
+                {/* Proof */}
                 <section className="mb-4">
-                    <h2 className="font-display text-2xl font-bold text-dark dark:text-white mb-3">{c.proofTitle}</h2>
-                    {/* TODO: reemplazar por el GIF/screenshot real */}
-                    <div className="w-full aspect-video rounded-2xl border-2 border-dashed border-gray-300 dark:border-white/20 flex items-center justify-center text-gray-400 text-sm font-mono">
-                        TODO: GIF / screenshot
-                    </div>
-                    <p className="text-sm text-dark/60 dark:text-white/60 mt-3">{c.proofCaption}</p>
+                    <h2 className="font-display text-2xl font-bold text-dark dark:text-white mb-2">{c.proofTitle}</h2>
+                    <p className="text-sm text-dark/60 dark:text-white/60 mb-5">{c.proofCaption}</p>
+                    {c.media?.length ? (
+                        <div className="space-y-6">
+                            {c.media.map((m) => (
+                                <figure key={m.src}>
+                                    <video
+                                        src={m.src}
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full rounded-2xl border border-gray-100 dark:border-white/10 bg-dark"
+                                    />
+                                    <figcaption className="text-sm text-dark/70 dark:text-white/70 mt-2">{m.caption}</figcaption>
+                                </figure>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="w-full aspect-video rounded-2xl border-2 border-dashed border-gray-300 dark:border-white/20 flex items-center justify-center text-gray-400 text-sm font-mono">
+                            TODO: GIF / screenshot
+                        </div>
+                    )}
                 </section>
 
             </article>
