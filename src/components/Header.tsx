@@ -124,10 +124,10 @@ export default function Header() {
 
                 {/* Links */}
                 <div className="hidden md:flex gap-8 items-center">
-                    <Link href="/#about" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navAbout')}</Link>
-                    <Link href="/#projects" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navProjects')}</Link>
-                    <Link href="/#experience" className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navExperience')}</Link>
-                    <Link href="/#contact" className="px-5 py-2 bg-dark dark:bg-primary text-white rounded-full font-medium text-sm hover:bg-primary dark:hover:bg-primary/80 transition-colors shadow-lg hover:shadow-primary/30">
+                    <Link href={{ pathname: '/', hash: '#about' }} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navAbout')}</Link>
+                    <Link href={{ pathname: '/', hash: '#projects' }} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navProjects')}</Link>
+                    <Link href={{ pathname: '/', hash: '#experience' }} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navExperience')}</Link>
+                    <Link href={{ pathname: '/', hash: '#contact' }} className="px-5 py-2 bg-dark dark:bg-primary text-white rounded-full font-medium text-sm hover:bg-primary dark:hover:bg-primary/80 transition-colors shadow-lg hover:shadow-primary/30">
                         {t('contactButton')}
                     </Link>
                     <LanguageSwitcher />
@@ -178,10 +178,10 @@ export default function Header() {
             {/* Mobile Menu */}
             {menuOpen && (
                 <div className="md:hidden bg-white/95 dark:bg-[#12121a]/95 backdrop-blur-md border-t border-gray-200 dark:border-white/10 px-6 py-4 flex flex-col gap-4">
-                    <Link href="/#about" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navAbout')}</Link>
-                    <Link href="/#projects" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navProjects')}</Link>
-                    <Link href="/#experience" onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navExperience')}</Link>
-                    <Link href="/#contact" onClick={() => setMenuOpen(false)} className="px-5 py-2 bg-dark dark:bg-primary text-white rounded-full font-medium text-sm hover:bg-primary dark:hover:bg-primary/80 transition-colors text-center">
+                    <Link href={{ pathname: '/', hash: '#about' }} onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navAbout')}</Link>
+                    <Link href={{ pathname: '/', hash: '#projects' }} onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navProjects')}</Link>
+                    <Link href={{ pathname: '/', hash: '#experience' }} onClick={() => setMenuOpen(false)} className="text-dark dark:text-white font-medium hover:text-primary transition-colors text-sm">{t('navExperience')}</Link>
+                    <Link href={{ pathname: '/', hash: '#contact' }} onClick={() => setMenuOpen(false)} className="px-5 py-2 bg-dark dark:bg-primary text-white rounded-full font-medium text-sm hover:bg-primary dark:hover:bg-primary/80 transition-colors text-center">
                         {t('contactButton')}
                     </Link>
                 </div>

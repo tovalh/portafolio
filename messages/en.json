@@ -16,7 +16,7 @@
     "toggleMenu": "Menu"
   },
   "Hero": {
-    "availableBadge": "Available for new projects",
+    "availableBadge": "Open to new opportunities",
     "statusBadge": "1M+ Records · <2s latency",
     "tooltip": "Relax, everything's under control.",
     "headline": "I make databases",
@@ -26,7 +26,7 @@
     "ctaPrimary": "See what I've built",
     "ctaSecondary": "Let's talk",
     "downloadCV": "Download CV",
-    "cvFile": "/Resume Cristobal Valladares.pdf"
+    "cvFile": "/resume-cristobal-valladares.pdf"
   },
   "NotFound": {
     "code": "404",
@@ -86,7 +86,7 @@
         "role": "Developer",
         "company": "Colegio Marcela Paz",
         "period": "Jul 2024 - Nov 2024",
-        "description": "First real work experience: systems for a school with Java and Spring Boot connected to PostgreSQL. I learned that student data cannot explode and that teachers don't tolerate bugs on Fridays.",
+        "description": "First real work experience: systems for a school with Java and Spring Boot connected to PostgreSQL. I learned that student data is sacred and that teachers don't tolerate bugs on Fridays.",
         "achievements": [
           "Implemented Google API integrations that automate data synchronization for 200+ users, eliminating manual entry",
           "Built a strategic planning system with Java and Spring Boot",
@@ -94,7 +94,7 @@
         ]
       },
       "utfsm": {
-        "role": "Computer Science Technician",
+        "role": "Associate Degree in Computer Science",
         "company": "Universidad Técnica Federico Santa María",
         "period": "2023 - 2024",
         "description": "Where it all started. Solid foundations in programming, networks, and systems. The place that turned curiosity into a career."
@@ -117,6 +117,12 @@
         "role": "Backend Core",
         "description": "Robust, typed, and modern. The foundation of most of my production systems.",
         "experience": "1.5 Yrs Prod."
+      },
+      "laravel": {
+        "name": "Laravel",
+        "role": "Backend Framework",
+        "description": "Multi-tenancy via global scopes, Eloquent and best practices applied in LaraVentas.",
+        "experience": "1 year"
       },
       "go": {
         "name": "Go",
@@ -155,7 +161,6 @@
       "postgresql": "PostgreSQL",
       "linux": "Linux",
       "postman": "Postman",
-      "laravel": "Laravel (Basic)",
       "tailwind": "Tailwind CSS",
       "bootstrap": "Bootstrap"
     }
@@ -249,7 +254,7 @@
     },
     "footer": {
       "copyright": "Cristóbal Valladares.",
-      "madeWith": "Made with React, Tailwind, and lots of coffee."
+      "madeWith": "Made with Next.js, Tailwind, and lots of coffee."
     }
   }
 }

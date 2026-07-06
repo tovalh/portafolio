@@ -1,5 +1,6 @@
 'use client';
 import { useLocale, useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
 import { useRouter, usePathname } from '../i18n/navigation';
 import { useTransition } from 'react';
 import { Languages } from 'lucide-react';
@@ -17,13 +18,20 @@ export default function LanguageSwitcher({ size = 'md' }: Props) {
     const t = useTranslations('Header');
     const router = useRouter();
     const pathname = usePathname();
+    const params = useParams();
     const [isPending, startTransition] = useTransition();
 
     const nextLocale = locale === 'es' ? 'en' : 'es';
 
     const handleSwitch = () => {
         startTransition(() => {
-            router.replace(pathname, { locale: nextLocale });
+            router.replace(
+                // Con `pathnames`, usePathname devuelve el template interno
+                // (p. ej. '/proyectos/[slug]'); los params rellenan el slug.
+                // @ts-expect-error -- los params corresponden a la ruta actual
+                { pathname, params },
+                { locale: nextLocale }
+            );
         });
     };
 

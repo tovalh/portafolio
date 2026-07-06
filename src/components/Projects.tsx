@@ -81,7 +81,7 @@ function ProjectCard({ project }: { project: ProjectConfig }) {
                     ) : <span />}
 
                     {project.slug ? (
-                        <Link href={`/proyectos/${project.slug}`}
+                        <Link href={{ pathname: '/proyectos/[slug]', params: { slug: project.slug } }}
                               className="flex items-center gap-2 text-primary font-bold text-sm hover:underline decoration-2 underline-offset-4 group/btn">
                             {t('viewDetails')} <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
                         </Link>

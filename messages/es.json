@@ -16,7 +16,7 @@
     "toggleMenu": "Menú"
   },
   "Hero": {
-    "availableBadge": "Disponible para nuevos proyectos",
+    "availableBadge": "Abierto a nuevas oportunidades",
     "statusBadge": "1M+ Registros · <2s latencia",
     "tooltip": "Tranquilo, todo bajo control.",
     "headline": "Hago que las bases de datos",
@@ -26,7 +26,7 @@
     "ctaPrimary": "Ver qué he construido",
     "ctaSecondary": "Hablemos",
     "downloadCV": "Descargar CV",
-    "cvFile": "/Cv Cristobal Valladares.pdf"
+    "cvFile": "/cv-cristobal-valladares.pdf"
   },
   "NotFound": {
     "code": "404",
@@ -86,7 +86,7 @@
         "role": "Developer",
         "company": "Colegio Marcela Paz",
         "period": "Jul 2024 - Nov 2024",
-        "description": "Primera experiencia laboral real: sistemas para un colegio con Java y Spring Boot conectado a PostgreSQL. Aprendí que los datos de alumnos no pueden explotar y que los profesores no toleran bugs en viernes.",
+        "description": "Primera experiencia laboral real: sistemas para un colegio con Java y Spring Boot conectado a PostgreSQL. Aprendí que los datos de alumnos son sagrados y que los profesores no toleran bugs en viernes.",
         "achievements": [
           "Implementé integraciones con Google API que automatizan la sincronización de datos para 200+ usuarios, eliminando el ingreso manual",
           "Construí sistema de planificación estratégica con Java y Spring Boot",
@@ -117,6 +117,12 @@
         "role": "Backend Core",
         "description": "Robusto, tipado y moderno. La base de la mayoría de mis sistemas de producción.",
         "experience": "1.5 Años Prod."
+      },
+      "laravel": {
+        "name": "Laravel",
+        "role": "Framework Backend",
+        "description": "Multi-tenancy con global scopes, Eloquent y buenas prácticas aplicadas en LaraVentas.",
+        "experience": "1 año"
       },
       "go": {
         "name": "Go",
@@ -155,7 +161,6 @@
       "postgresql": "PostgreSQL",
       "linux": "Linux",
       "postman": "Postman",
-      "laravel": "Laravel (Básico)",
       "tailwind": "Tailwind CSS",
       "bootstrap": "Bootstrap"
     }
@@ -249,7 +254,7 @@
     },
     "footer": {
       "copyright": "Cristóbal Valladares.",
-      "madeWith": "Hecho con React, Tailwind y mucho café."
+      "madeWith": "Hecho con Next.js, Tailwind y mucho café."
     }
   }
 }

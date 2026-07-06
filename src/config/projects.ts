@@ -23,7 +23,7 @@ export const PROJECTS_CONFIG: ProjectConfig[] = [
         color: 'orange',
         icon: 'database',
         slug: 'laraventas',
-        github: 'https://github.com/tovalh/LaraVentas', // TODO: verificar nombre del repo
+        github: 'https://github.com/tovalh/LaraVentas',
         demo: 'https://laraventas-production.up.railway.app',
         thumb: '/thumbnails/laraventas.svg'
     },
@@ -35,7 +35,7 @@ export const PROJECTS_CONFIG: ProjectConfig[] = [
         color: 'green',
         icon: 'radio',
         slug: 'notif-service',
-        github: 'https://github.com/tovalh/notif_service', // TODO: verificar nombre del repo
+        github: 'https://github.com/tovalh/notif_service',
         demo: 'https://laraventas-production.up.railway.app',
         thumb: '/thumbnails/notif_service.svg'
     },
@@ -47,7 +47,7 @@ export const PROJECTS_CONFIG: ProjectConfig[] = [
         color: 'blue',
         icon: 'code',
         slug: 'finmail',
-        github: 'https://github.com/tovalh/finmail', // TODO: verificar nombre del repo
+        github: 'https://github.com/tovalh/finmail',
         thumb: '/thumbnails/finmail.svg'
     },
     {
@@ -58,7 +58,7 @@ export const PROJECTS_CONFIG: ProjectConfig[] = [
         color: 'red',
         icon: 'activity',
         slug: 'health-status',
-        github: 'https://github.com/tovalh/health_status', // TODO: verificar nombre del repo
+        github: 'https://github.com/tovalh/micro-status',
         thumb: '/thumbnails/health_status.svg'
     }
 ];

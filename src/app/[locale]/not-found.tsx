@@ -59,7 +59,7 @@ export default function NotFound() {
                         {t('backHome')}
                     </Link>
                     <Link
-                        href="/#contact"
+                        href={{ pathname: '/', hash: '#contact' }}
                         className="px-8 py-4 bg-white dark:bg-white/10 border-2 border-dark/30 dark:border-white/30 text-dark/70 dark:text-white/70 font-bold rounded-full hover:border-dark/60 dark:hover:border-white/60 hover:text-dark dark:hover:text-white hover:scale-105 transition-all flex items-center justify-center gap-2"
                     >
                         <Mail size={16} />

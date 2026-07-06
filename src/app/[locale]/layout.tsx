@@ -37,7 +37,13 @@ export async function generateMetadata({
     const t = await getTranslations({ locale, namespace: 'Metadata' });
 
     return {
-        title: t('title'),
+        // Base para resolver canonical/og relativos y permitir que las
+        // páginas hijas (case studies) hereden y sobreescriban solo lo suyo.
+        metadataBase: new URL('https://www.toval.dev'),
+        title: {
+            default: t('title'),
+            template: '%s · toval.dev'
+        },
         description: t('description'),
         icons: {
             icon: "/images/icon.png",
@@ -53,17 +59,17 @@ export async function generateMetadata({
         openGraph: {
             title: t('title'),
             description: t('description'),
-            url: `https://toval.dev/${locale}`,
+            url: `https://www.toval.dev/${locale}`,
             siteName: "toval.dev",
-            images: [{ url: "/images/icon.png", width: 800, height: 800 }],
+            images: [{ url: `/images/og-banner-${locale === 'en' ? 'en' : 'es'}.png`, width: 1200, height: 630 }],
             type: "website",
             locale: locale === 'es' ? 'es_CL' : 'en_US'
         },
         twitter: {
-            card: "summary",
+            card: "summary_large_image",
             title: t('title'),
             description: t('description'),
-            images: ["/images/icon.png"],
+            images: [`/images/og-banner-${locale === 'en' ? 'en' : 'es'}.png`],
         },
     };
 }

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { Link } from '../../../../i18n/navigation';
 import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
 import TechTag from '../../../../components/TechTag';
@@ -187,10 +188,10 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
     'health-status': {
         es: {
             title: 'Monitor de Salud de Servicios',
-            codename: 'health_status',
+            codename: 'micro-status',
             tagline: 'Enterarme yo antes que el cliente.',
             tags: ['Go', 'Telegram', 'SMTP', 'Docker', 'Concurrency'],
-            github: 'https://github.com/tovalh/health_status',
+            github: 'https://github.com/tovalh/micro-status',
             thumb: '/thumbnails/health_status.svg',
             problemTitle: 'El problema',
             problem: 'El servidor de producción empezó a fallar y a caerse sin aviso: no sabíamos cuándo pasaba porque no nos llegaba ninguna notificación. Nos enterábamos por los clientes, que empezaron a llamarnos constantemente por las caídas. Estar siempre un paso atrás, apagando incendios que ya habían escalado, era insostenible.',
@@ -214,10 +215,10 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
         },
         en: {
             title: 'Service Health Monitor',
-            codename: 'health_status',
+            codename: 'micro-status',
             tagline: 'So I find out before the client does.',
             tags: ['Go', 'Telegram', 'SMTP', 'Docker', 'Concurrency'],
-            github: 'https://github.com/tovalh/health_status',
+            github: 'https://github.com/tovalh/micro-status',
             thumb: '/thumbnails/health_status.svg',
             problemTitle: 'The problem',
             problem: 'The production server started failing and going down with no warning: we had no idea when it happened because no notification ever reached us. We found out from the clients, who started calling us constantly about the outages. Always being a step behind, putting out fires that had already escalated, was unsustainable.',
@@ -251,6 +252,55 @@ export function generateStaticParams() {
     ];
 }
 
+// Ruta pública localizada del case study (el segmento cambia por idioma).
+function casePath(locale: Locale, slug: string) {
+    return locale === 'en' ? `/en/projects/${slug}` : `/es/proyectos/${slug}`;
+}
+
+// Metadata por proyecto y por locale: title/description propios,
+// canonical correcto y hreflang hacia la versión en el otro idioma.
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+    const { locale, slug } = await params;
+    const entry = CASE_STUDIES[slug];
+    if (!entry) return {};
+
+    const loc: Locale = locale === 'en' ? 'en' : 'es';
+    const c = entry[loc];
+    const title = `${c.codename} — ${c.title}`;
+
+    return {
+        title,
+        description: c.tagline,
+        alternates: {
+            canonical: casePath(loc, slug),
+            languages: {
+                es: casePath('es', slug),
+                en: casePath('en', slug),
+                'x-default': casePath('es', slug),
+            },
+        },
+        openGraph: {
+            title,
+            description: c.tagline,
+            url: `https://www.toval.dev${casePath(loc, slug)}`,
+            siteName: 'toval.dev',
+            type: 'article',
+            locale: loc === 'es' ? 'es_CL' : 'en_US',
+            images: [{ url: `/images/og-banner-${loc}.png`, width: 1200, height: 630 }],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description: c.tagline,
+            images: [`/images/og-banner-${loc}.png`],
+        },
+    };
+}
+
 export default async function CaseStudyPage({
     params,
 }: {
@@ -266,7 +316,7 @@ export default async function CaseStudyPage({
         <main className="min-h-screen px-4 py-20 md:py-28">
             <article className="max-w-3xl mx-auto">
 
-                <Link href="/#projects" className="inline-flex items-center gap-2 text-sm text-dark/60 dark:text-white/60 hover:text-primary transition-colors mb-10">
+                <Link href={{ pathname: '/', hash: '#projects' }} className="inline-flex items-center gap-2 text-sm text-dark/60 dark:text-white/60 hover:text-primary transition-colors mb-10">
                     <ArrowLeft size={16} /> {c.backLabel}
                 </Link>
 
@@ -363,7 +413,7 @@ export default async function CaseStudyPage({
                         </div>
                     ) : (
                         <div className="w-full aspect-video rounded-2xl border-2 border-dashed border-gray-300 dark:border-white/20 flex items-center justify-center text-gray-400 text-sm font-mono">
-                            TODO: GIF / screenshot
+                            {locale === 'es' ? 'Demo visual en preparación' : 'Visual demo coming soon'}
                         </div>
                     )}
                 </section>
