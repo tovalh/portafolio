@@ -5,6 +5,7 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import { notFound } from 'next/navigation';
 import "../globals.css";
 import Header from '../../components/Header';
+import CleanUrl from '../../components/CleanUrl';
 import { routing } from '../../i18n/routing';
 
 const dmSans = DM_Sans({
@@ -49,17 +50,17 @@ export async function generateMetadata({
             icon: "/images/icon.png",
         },
         alternates: {
-            canonical: `/${locale}`,
+            canonical: locale === 'en' ? '/en' : '/',
             languages: {
-                es: '/es',
+                es: '/',
                 en: '/en',
-                'x-default': '/es'
+                'x-default': '/'
             }
         },
         openGraph: {
             title: t('title'),
             description: t('description'),
-            url: `https://www.toval.dev/${locale}`,
+            url: locale === 'en' ? 'https://www.toval.dev/en' : 'https://www.toval.dev',
             siteName: "toval.dev",
             images: [{ url: `/images/og-banner-${locale === 'en' ? 'en' : 'es'}.png`, width: 1200, height: 630 }],
             type: "website",
@@ -115,6 +116,7 @@ export default async function LocaleLayout({
                 <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-secondary/20 rounded-full mix-blend-multiply filter blur-[100px] animate-blob animation-delay-2000 opacity-70"></div>
                 <div className="absolute bottom-[-10%] left-[20%] w-[45vw] h-[45vw] bg-accent/20 rounded-full mix-blend-multiply filter blur-[100px] animate-blob animation-delay-4000 opacity-70"></div>
             </div>
+            <CleanUrl />
             <Header />
             {children}
         </NextIntlClientProvider>
