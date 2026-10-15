@@ -254,7 +254,7 @@ export function generateStaticParams() {
 
 // Ruta pública localizada del case study (el segmento cambia por idioma).
 function casePath(locale: Locale, slug: string) {
-    return locale === 'en' ? `/en/projects/${slug}` : `/es/proyectos/${slug}`;
+    return locale === 'en' ? `/en/projects/${slug}` : `/proyectos/${slug}`;
 }
 
 // Metadata por proyecto y por locale: title/description propios,

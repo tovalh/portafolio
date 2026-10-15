@@ -14,8 +14,10 @@ import {
     Postman,
     Laravel,
     TailwindCSS,
-    Bootstrap5
+    Bootstrap5,
+    ClaudeAI
 } from 'developer-icons';
+import { Sparkles } from 'lucide-react';
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
     php: PHP,
@@ -30,22 +32,10 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string; size?: 
     postman: Postman,
     laravel: Laravel,
     tailwind: TailwindCSS,
-    bootstrap: Bootstrap5
+    bootstrap: Bootstrap5,
+    gemini: Sparkles,
+    claudecode: ClaudeAI
 };
-
-// Calcula la experiencia desde 2 fechas (YYYY-MM), igual que el timeline.
-// Sin `end` = hasta hoy. Formato "X años Y meses".
-function formatExperience(start: string, end: string | undefined, yearS: string, yearP: string, monthS: string, monthP: string): string {
-    const s = new Date(`${start}-01`);
-    const e = end ? new Date(`${end}-01`) : new Date();
-    const months = (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
-    if (months < 1) return `1 ${monthS}`;
-    const years = Math.floor(months / 12);
-    const rem = months % 12;
-    const yPart = years > 0 ? `${years} ${years === 1 ? yearS : yearP}` : '';
-    const mPart = rem > 0 ? `${rem} ${rem === 1 ? monthS : monthP}` : '';
-    return [yPart, mPart].filter(Boolean).join(' ') || `1 ${monthS}`;
-}
 
 function Card({ config }: { config: CoreSkillConfig }) {
     const t = useTranslations('Skills');
@@ -83,7 +73,7 @@ function Card({ config }: { config: CoreSkillConfig }) {
     const name = t(`core.${config.id}.name`);
     const role = t(`core.${config.id}.role`);
     const description = t(`core.${config.id}.description`);
-    const experience = formatExperience(config.start, config.end, t('yearSingular'), t('yearPlural'), t('monthSingular'), t('monthPlural'));
+    const usedIn = t(`core.${config.id}.usedIn`);
 
     return (
         <div className={`bg-white/70 dark:bg-white/10 backdrop-blur-md rounded-3xl p-6 border-2 ${style.border} ${style.shadow} shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col h-full`}>
@@ -107,12 +97,12 @@ function Card({ config }: { config: CoreSkillConfig }) {
                 {description}
             </p>
 
-            {/* Metric: Experience */}
+            {/* Dónde lo uso (producción vs proyectos) */}
             <div className="mt-auto pt-4 border-t border-gray-100/50 dark:border-white/10">
                 <div className="flex justify-between items-end lg:flex-col lg:items-start lg:gap-1">
-                    <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{t('experienceLabel')}</span>
-                    <span className={`font-mono font-bold text-base ${style.text}`}>
-                        {experience}
+                    <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{t('usedInLabel')}</span>
+                    <span className={`font-mono font-bold text-sm ${style.text}`}>
+                        {usedIn}
                     </span>
                 </div>
             </div>

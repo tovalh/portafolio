@@ -6,16 +6,16 @@ const BASE = 'https://www.toval.dev';
 const PROJECT_SLUGS = ['laraventas', 'notif-service', 'finmail', 'health-status'];
 
 const casePath = (locale: 'es' | 'en', slug: string) =>
-    locale === 'en' ? `${BASE}/en/projects/${slug}` : `${BASE}/es/proyectos/${slug}`;
+    locale === 'en' ? `${BASE}/en/projects/${slug}` : `${BASE}/proyectos/${slug}`;
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const home: MetadataRoute.Sitemap = (['es', 'en'] as const).map((locale) => ({
-        url: `${BASE}/${locale}`,
+        url: locale === 'en' ? `${BASE}/en` : BASE,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 1,
         alternates: {
-            languages: { es: `${BASE}/es`, en: `${BASE}/en` }
+            languages: { es: BASE, en: `${BASE}/en` }
         }
     }));
 

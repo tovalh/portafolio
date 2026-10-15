@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "Cristóbal Valladares — Backend Developer",
-    "description": "Backend developer specialized in databases and robust, scalable systems that hold up under real pressure."
+    "description": "Backend developer (PHP & Go) specialized in databases, robust systems and LLM integrations."
   },
   "Header": {
     "logo": "Toval",
@@ -16,13 +16,13 @@
     "toggleMenu": "Menu"
   },
   "Hero": {
-    "availableBadge": "Open to new opportunities",
+    "availableBadge": "Open to remote roles",
     "statusBadge": "1M+ Records · <2s latency",
     "tooltip": "Relax, everything's under control.",
     "headline": "I make databases",
     "headlineHighlight": "not explode.",
     "headlineNote": "(yet)",
-    "subtitle": "Backend Developer · PHP & Go · Systems that hold up under pressure",
+    "subtitle": "Backend Developer · PHP & Go · LLM integrations",
     "ctaPrimary": "See what I've built",
     "ctaSecondary": "Let's talk",
     "downloadCV": "Download CV",
@@ -42,9 +42,9 @@
     "badgeText": "SYSADMIN MODE",
     "title": "I'm Cristóbal, but everyone calls me",
     "titleHighlight": "Toval",
-    "paragraph1": "Backend developer focused on databases and robust systems. I've spent over a year and a half building enterprise systems that handle millions of records without breaking a sweat, at a startup where if something breaks, I'm the one who fixes it.",
+    "paragraph1": "Backend developer focused on databases and robust systems. Since 2024 I've been building enterprise systems that handle millions of records without breaking a sweat, at a startup where if something breaks, I'm the one who fixes it.",
     "paragraph2": "I specialize in making complex systems work under real pressure: pages responding in under 2 seconds, multi-database architectures, building APIs across countries, and that legacy code no one wants to touch. I have a habit of leaving code better than I found it.",
-    "paragraph3": "Currently building microservices in Go, consolidating best practices in PHP day to day, and getting deeper into concurrency and distributed systems: getting the pieces to talk to each other without breaking."
+    "paragraph3": "Today I build microservices in Go and integrate LLMs into real systems: in FinMail, Gemini classifies bank transactions in real time. Day to day I work with an agentic workflow (Claude Code, agents and my own skills) to build faster, without giving up judgment over what reaches production."
   },
   "Experience": {
     "title": "Battle",
@@ -68,6 +68,7 @@
         "achievements": [
           "Designed SQL queries that efficiently process over 1,000,000 records through indexing and optimized joins",
           "Developed PHP backend architecture with consistent response times under 2 seconds",
+          "Built Pulse, a Go health monitor that watches our production microservices and alerts on outages before clients notice",
           "Contributed to the development of a distributed transaction coordinator that syncs 5+ databases with atomic rollback",
           "Co-developed a REST API with JWT authentication for real-time electronic invoicing sync between Chile and Spain (SII integration)",
           "Part of the team that built a complete accounting module with all business rules",
@@ -106,53 +107,47 @@
     "subtitle": "The tools I use to build robust solutions.",
     "badge": "CORE STACK",
     "secondaryTitle": "I also work with",
-    "experienceLabel": "Experience",
-    "yearSingular": "year",
-    "yearPlural": "years",
-    "monthSingular": "month",
-    "monthPlural": "months",
     "core": {
       "php": {
         "name": "PHP",
         "role": "Backend Core",
         "description": "Robust, typed, and modern. The foundation of most of my production systems.",
-        "experience": "1.5 Yrs Prod."
+        "usedIn": "Production · Kudos"
       },
       "laravel": {
         "name": "Laravel",
         "role": "Backend Framework",
         "description": "Multi-tenancy via global scopes, Eloquent and best practices applied in LaraVentas.",
-        "experience": "1 year"
+        "usedIn": "LaraVentas"
       },
       "go": {
         "name": "Go",
         "role": "Microservices",
         "description": "Real concurrency with goroutines and channels. For microservices that hold load and open connections.",
-        "experience": "Since Jan 2026"
+        "usedIn": "Production · Kudos (Pulse)"
       },
       "mysql": {
         "name": "MySQL",
         "role": "Persistence",
         "description": "Efficient management of millions of records. Index optimization and complex queries.",
-        "experience": "1.5 Yrs Prod."
+        "usedIn": "Production · Kudos"
       },
       "java": {
         "name": "Java / Spring",
         "role": "Enterprise",
         "description": "For strict architectures. Dependency injection and type safety.",
-        "experience": "6 months"
+        "usedIn": "Marcela Paz · FinMail"
       },
       "javascript": {
         "name": "JavaScript",
         "role": "Interaction",
         "description": "The glue that holds it all together. DOM manipulation, validations, and async logic.",
-        "experience": "1.5 Yrs"
+        "usedIn": "Production · Kudos"
       },
       "git": {
         "name": "Git",
         "role": "Version Control",
-        "description": "Version control, team workflows, and conflict resolution.",
-        "experience": "Daily"
+        "description": "Version control, team workflows, and conflict resolution."
       }
     },
     "secondary": {
@@ -162,8 +157,11 @@
       "linux": "Linux",
       "postman": "Postman",
       "tailwind": "Tailwind CSS",
-      "bootstrap": "Bootstrap"
-    }
+      "bootstrap": "Bootstrap",
+      "gemini": "Gemini API",
+      "claudecode": "Claude Code"
+    },
+    "usedInLabel": "Where I use it"
   },
   "Projects": {
     "title": "What I've built",
@@ -218,8 +216,8 @@
       },
       "healthMonitor": {
         "title": "Health Monitor",
-        "description": "Watches the services and pings Telegram when something goes down, with flap-filtering so it never cries wolf. It finds out before the client does.",
-        "status": "Uptime Watch",
+        "description": "In production at Kudos: watches the services and alerts the moment something goes down, with flap-filtering so it never cries wolf. It finds out before the client does.",
+        "status": "In production",
         "stats": "Alerts"
       }
     }

@@ -16,6 +16,28 @@ export interface ProjectConfig {
 
 export const PROJECTS_CONFIG: ProjectConfig[] = [
     {
+        id: 4,
+        key: 'healthMonitor',
+        tags: ['Go', 'Telegram', 'SMTP', 'Docker', 'Concurrency'],
+        isPrivate: false,
+        color: 'red',
+        icon: 'activity',
+        slug: 'health-status',
+        github: 'https://github.com/tovalh/micro-status',
+        thumb: '/thumbnails/health_status.svg'
+    },
+    {
+        id: 3,
+        key: 'finMail',
+        tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Gmail API', 'Gemini'],
+        isPrivate: false,
+        color: 'blue',
+        icon: 'code',
+        slug: 'finmail',
+        github: 'https://github.com/tovalh/finmail',
+        thumb: '/thumbnails/finmail.svg'
+    },
+    {
         id: 1,
         key: 'laraVentas',
         tags: ['Laravel', 'Inertia', 'Vue', 'MySQL', 'PHP'],
@@ -38,27 +60,5 @@ export const PROJECTS_CONFIG: ProjectConfig[] = [
         github: 'https://github.com/tovalh/notif_service',
         demo: 'https://laraventas-production.up.railway.app',
         thumb: '/thumbnails/notif_service.svg'
-    },
-    {
-        id: 3,
-        key: 'finMail',
-        tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Gmail API', 'Gemini'],
-        isPrivate: false,
-        color: 'blue',
-        icon: 'code',
-        slug: 'finmail',
-        github: 'https://github.com/tovalh/finmail',
-        thumb: '/thumbnails/finmail.svg'
-    },
-    {
-        id: 4,
-        key: 'healthMonitor',
-        tags: ['Go', 'Telegram', 'SMTP', 'Docker', 'Concurrency'],
-        isPrivate: false,
-        color: 'red',
-        icon: 'activity',
-        slug: 'health-status',
-        github: 'https://github.com/tovalh/micro-status',
-        thumb: '/thumbnails/health_status.svg'
     }
 ];

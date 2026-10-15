@@ -22,7 +22,7 @@ export const TIMELINE_CONFIG: TimelineConfigItem[] = [
         highlight: true,
         tech: ['PHP', 'Go', 'JavaScript', 'JQuery', 'Git', 'Bootstrap', 'MySQL', 'MariaDB'],
         hasAchievements: true,
-        achievementsCount: 8
+        achievementsCount: 9
     },
     {
         id: 2,
