@@ -68,7 +68,7 @@
         "achievements": [
           "Designed SQL queries that efficiently process over 1,000,000 records through indexing and optimized joins",
           "Developed PHP backend architecture with consistent response times under 2 seconds",
-          "Built Pulse, a Go health monitor that watches our production microservices and alerts on outages before clients notice",
+          "Built Pulse, a Go health monitor that watched our production services and alerted the team on Telegram before clients noticed",
           "Contributed to the development of a distributed transaction coordinator that syncs 5+ databases with atomic rollback",
           "Co-developed a REST API with JWT authentication for real-time electronic invoicing sync between Chile and Spain (SII integration)",
           "Part of the team that built a complete accounting module with all business rules",
@@ -124,7 +124,7 @@
         "name": "Go",
         "role": "Microservices",
         "description": "Real concurrency with goroutines and channels. For microservices that hold load and open connections.",
-        "usedIn": "Production · Kudos (Pulse)"
+        "usedIn": "Pulse at Kudos · LaraVentas"
       },
       "mysql": {
         "name": "MySQL",
@@ -216,8 +216,8 @@
       },
       "healthMonitor": {
         "title": "Health Monitor",
-        "description": "In production at Kudos: watches the services and alerts the moment something goes down, with flap-filtering so it never cries wolf. It finds out before the client does.",
-        "status": "In production",
+        "description": "Born at Kudos to catch outages before clients did; today it watches the LaraVentas services. It alerts the moment something goes down, with flap-filtering so it never cries wolf.",
+        "status": "Goroutines",
         "stats": "Alerts"
       }
     }

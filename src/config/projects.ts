@@ -18,7 +18,7 @@ export const PROJECTS_CONFIG: ProjectConfig[] = [
     {
         id: 4,
         key: 'healthMonitor',
-        tags: ['Go', 'Telegram', 'SMTP', 'Docker', 'Concurrency'],
+        tags: ['Go', 'Telegram', 'Docker', 'Concurrency'],
         isPrivate: false,
         color: 'red',
         icon: 'activity',
