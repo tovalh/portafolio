@@ -3,6 +3,7 @@ import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { Analytics } from '@vercel/analytics/next';
 import "../globals.css";
 import Header from '../../components/Header';
 import CleanUrl from '../../components/CleanUrl';
@@ -119,6 +120,7 @@ export default async function LocaleLayout({
             <CleanUrl />
             <Header />
             {children}
+            <Analytics />
         </NextIntlClientProvider>
         </body>
         </html>
