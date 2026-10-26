@@ -2,10 +2,10 @@ import React from 'react';
 import {
     Go, Docker, MySQL, React as ReactIcon, NodeJs, MongoDB, Redis, Python,
     TypeScript, Oracle, Spring, PHP, Laravel, Git, Telegram, PostgreSQL,
-    MariaDB, TailwindCSS, Bootstrap5, Java, JavaScript, VueJs, Gmail
+    MariaDB, TailwindCSS, Bootstrap5, Java, JavaScript, VueJs, Gmail, ClaudeAI
 } from 'developer-icons';
 import {
-    Radio, Fingerprint, KeyRound, Send, GitFork, Sparkles, Layers,
+    Radio, Fingerprint, KeyRound, Send, GitFork, Sparkles, Layers, Smartphone,
     type LucideIcon
 } from 'lucide-react';
 
@@ -39,6 +39,7 @@ const BRAND_ICONS: Record<string, IconType> = {
     'bootstrap': Bootstrap5,
     'java': Java,
     'javascript': JavaScript,
+    'claude api': ClaudeAI,
 };
 
 // Conceptos/protocolos sin logo de marca -> ícono genérico (lucide).
@@ -50,6 +51,7 @@ const CONCEPT_ICONS: Record<string, LucideIcon> = {
     'concurrency': GitFork,
     'gemini': Sparkles,
     'inertia': Layers,
+    'pwa': Smartphone,
 };
 
 export default function TechTag({ label }: { label: string }) {

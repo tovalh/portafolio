@@ -20,6 +20,7 @@ interface CaseContent {
     tagline: string;
     tags: string[];
     github?: string;
+    githubFrontend?: string; // proyectos con backend y frontend en repos separados
     demo?: string;
     thumb: string;
     problemTitle: string;
@@ -144,8 +145,10 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
             title: 'Finanzas leídas del correo',
             codename: 'FinMail',
             tagline: 'Los bancos no tienen API abierta. Este servicio lee el correo que igual te mandan.',
-            tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Gmail API', 'Gemini', 'JWT'],
+            tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Gmail API', 'Claude API', 'React', 'PWA'],
             github: 'https://github.com/tovalh/finmail',
+            githubFrontend: 'https://github.com/tovalh/finmail-pwa',
+            demo: 'https://finmail.toval.dev',
             thumb: '/thumbnails/finmail.svg',
             problemTitle: 'El problema',
             problem: 'Nunca lograba tener mis finanzas ordenadas. Lo intenté con varias apps y todas terminaban igual: o anotaba cada gasto a mano, o lo ingresaba dos veces —una en el banco y otra en la app—. Esa fricción hacía que durara motivado tres días y después abandonara. Lo que necesitaba era tener mis gastos ordenados solos, con la menor intervención humana posible; si el sistema me obliga a cargar algo, ya perdió.',
@@ -156,18 +159,21 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
                 { title: 'Leer el correo, no esperar una API', detail: 'Los bancos no exponen API, pero sí mandan un correo por cada transacción. Trabajar con lo que hay, no con lo ideal.' },
                 { title: 'Parsers enchufables por banco', detail: 'Sumar un banco es implementar un parser; auth, IA y endpoints ya están construidos.' },
                 { title: 'Aprender la categoría y dejar de preguntar', detail: 'Cuando el sistema ya sabe a qué categoría pertenece un comercio, no vuelve a consultar a la IA: menos confirmaciones manuales y menos tokens gastados. Eficiencia y ahorro con el uso.' },
-                { title: 'Auth con JWT + frontend PWA', detail: 'El backend expone una API con auth JWT (sin estado) y el frontend es una PWA: se usa como app desde el teléfono, que es donde uno mira sus gastos.' },
+                { title: 'La IA solo puede elegir categorías que existen', detail: 'Le pido la respuesta a Claude con un JSON schema cuyo enum son mis categorías. Así nunca inventa una que no está, y la carga histórica clasifica en lotes en vez de hacer una llamada por correo.' },
+                { title: 'Auth con JWT + frontend PWA', detail: 'El backend expone una API con auth JWT (sin estado) y el frontend es una PWA en React: se usa como app desde el teléfono, que es donde uno mira sus gastos. La demo corre con datos de ejemplo, sin backend.' },
             ],
             proofTitle: 'En vivo',
-            proofCaption: 'La PWA muestra las transacciones parseadas con la categoría sugerida por IA.',
+            proofCaption: 'La PWA muestra las transacciones parseadas con la categoría sugerida por IA. Puedes probarla en la demo.',
             backLabel: 'Volver a proyectos',
         },
         en: {
             title: 'Finances read from your inbox',
             codename: 'FinMail',
             tagline: 'Banks have no open API. This service reads the emails they send anyway.',
-            tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Gmail API', 'Gemini', 'JWT'],
+            tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Gmail API', 'Claude API', 'React', 'PWA'],
             github: 'https://github.com/tovalh/finmail',
+            githubFrontend: 'https://github.com/tovalh/finmail-pwa',
+            demo: 'https://finmail.toval.dev',
             thumb: '/thumbnails/finmail.svg',
             problemTitle: 'The problem',
             problem: 'I could never keep my finances organized. I tried several apps and they all ended the same way: either I logged every expense by hand, or I entered it twice —once in the bank, once in the app. That friction meant I\'d stay motivated for three days and then quit. What I needed was to have my spending organized on its own, with the least human intervention possible; if the system forces me to enter something, it already lost.',
@@ -178,10 +184,11 @@ const CASE_STUDIES: Record<string, Record<Locale, CaseContent>> = {
                 { title: 'Read the email, don\'t wait for an API', detail: 'Banks expose no API, but they do send an email for every transaction. Work with what exists, not with the ideal.' },
                 { title: 'Pluggable per-bank parsers', detail: 'Adding a bank is implementing a parser; auth, AI and endpoints are already built.' },
                 { title: 'Learn the category and stop asking', detail: 'Once the system knows a merchant\'s category, it never queries the AI again: fewer manual confirmations and fewer tokens spent. Efficiency and savings that grow with use.' },
-                { title: 'JWT auth + PWA frontend', detail: 'The backend exposes a stateless JWT API and the frontend is a PWA: you use it like an app from your phone, which is where you actually check your spending.' },
+                { title: 'The AI can only pick categories that exist', detail: 'I ask Claude for the answer with a JSON schema whose enum is my category list. It can never invent one that isn\'t there, and the historical import classifies in batches instead of one call per email.' },
+                { title: 'JWT auth + PWA frontend', detail: 'The backend exposes a stateless JWT API and the frontend is a React PWA: you use it like an app from your phone, which is where you actually check your spending. The demo runs on sample data, with no backend.' },
             ],
             proofTitle: 'Live',
-            proofCaption: 'The PWA shows parsed transactions with their AI-suggested category.',
+            proofCaption: 'The PWA shows parsed transactions with their AI-suggested category. You can try it in the demo.',
             backLabel: 'Back to projects',
         },
     },
@@ -333,7 +340,12 @@ export default async function CaseStudyPage({
                     <div className="flex flex-wrap gap-3">
                         {c.github && (
                             <a href={c.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-white/20 text-sm font-medium text-dark dark:text-white hover:bg-primary hover:text-white hover:border-primary transition-colors">
-                                <Github size={16} /> GitHub
+                                <Github size={16} /> {c.githubFrontend ? 'GitHub · Backend' : 'GitHub'}
+                            </a>
+                        )}
+                        {c.githubFrontend && (
+                            <a href={c.githubFrontend} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-white/20 text-sm font-medium text-dark dark:text-white hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                                <Github size={16} /> GitHub · PWA
                             </a>
                         )}
                         {c.demo && (

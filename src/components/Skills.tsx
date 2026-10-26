@@ -17,7 +17,6 @@ import {
     Bootstrap5,
     ClaudeAI
 } from 'developer-icons';
-import { Sparkles } from 'lucide-react';
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
     php: PHP,
@@ -33,7 +32,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string; size?: 
     laravel: Laravel,
     tailwind: TailwindCSS,
     bootstrap: Bootstrap5,
-    gemini: Sparkles,
+    claudeapi: ClaudeAI,
     claudecode: ClaudeAI
 };
 

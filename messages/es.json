@@ -44,7 +44,7 @@
     "titleHighlight": "Toval",
     "paragraph1": "Desarrollador backend con foco en bases de datos y sistemas robustos. Desde 2024 construyo sistemas empresariales que manejan millones de registros sin pestañear, en una startup donde si algo se rompe, soy yo quien lo arregla.",
     "paragraph2": "Me especializo en hacer que sistemas complejos funcionen bajo presión real: páginas respondiendo en menos de 2 segundos, arquitecturas multi-database, construcción de API entre países, y ese código legacy que nadie quiere tocar. Tengo la costumbre de dejar el código mejor de como lo encontré.",
-    "paragraph3": "Hoy construyo microservicios en Go e integro LLMs dentro de sistemas reales: en FinMail, Gemini clasifica transacciones bancarias en tiempo real. En el día a día trabajo con un flujo agéntico (Claude Code, agentes y skills propias) para construir más rápido, sin soltar el criterio sobre lo que llega a producción."
+    "paragraph3": "Hoy construyo microservicios en Go e integro LLMs dentro de sistemas reales: en FinMail, Claude clasifica transacciones bancarias en tiempo real. En el día a día trabajo con un flujo agéntico (Claude Code, agentes y skills propias) para construir más rápido, sin soltar el criterio sobre lo que llega a producción."
   },
   "Experience": {
     "title": "Historial de",
@@ -158,7 +158,7 @@
       "postman": "Postman",
       "tailwind": "Tailwind CSS",
       "bootstrap": "Bootstrap",
-      "gemini": "Gemini API",
+      "claudeapi": "Claude API",
       "claudecode": "Claude Code"
     },
     "usedInLabel": "Dónde lo uso"
@@ -204,8 +204,8 @@
       },
       "finMail": {
         "title": "FinMail",
-        "description": "Lee los correos del banco, parsea las transacciones y las categoriza con IA. Java + Spring Boot + Gemini, porque los bancos no tienen API abierta.",
-        "status": "IA · Gemini",
+        "description": "Lee los correos del banco, parsea las transacciones y las categoriza con IA, porque los bancos no tienen API abierta. Backend en Java + Spring Boot con la API de Claude y una PWA en React con demo pública.",
+        "status": "IA · Claude",
         "stats": "Fintech"
       },
       "notifService": {
