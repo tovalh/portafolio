@@ -25,7 +25,7 @@ export const SECONDARY_SKILL_IDS = [
     'postman',
     'tailwind',
     'bootstrap',
-    'gemini',
+    'claudeapi',
     'claudecode'
 ] as const;
 

@@ -44,7 +44,7 @@
     "titleHighlight": "Toval",
     "paragraph1": "Backend developer focused on databases and robust systems. Since 2024 I've been building enterprise systems that handle millions of records without breaking a sweat, at a startup where if something breaks, I'm the one who fixes it.",
     "paragraph2": "I specialize in making complex systems work under real pressure: pages responding in under 2 seconds, multi-database architectures, building APIs across countries, and that legacy code no one wants to touch. I have a habit of leaving code better than I found it.",
-    "paragraph3": "Today I build microservices in Go and integrate LLMs into real systems: in FinMail, Gemini classifies bank transactions in real time. Day to day I work with an agentic workflow (Claude Code, agents and my own skills) to build faster, without giving up judgment over what reaches production."
+    "paragraph3": "Today I build microservices in Go and integrate LLMs into real systems: in FinMail, Claude classifies bank transactions in real time. Day to day I work with an agentic workflow (Claude Code, agents and my own skills) to build faster, without giving up judgment over what reaches production."
   },
   "Experience": {
     "title": "Battle",
@@ -158,7 +158,7 @@
       "postman": "Postman",
       "tailwind": "Tailwind CSS",
       "bootstrap": "Bootstrap",
-      "gemini": "Gemini API",
+      "claudeapi": "Claude API",
       "claudecode": "Claude Code"
     },
     "usedInLabel": "Where I use it"
@@ -204,8 +204,8 @@
       },
       "finMail": {
         "title": "FinMail",
-        "description": "Reads bank emails, parses transactions and categorizes them with AI. Java + Spring Boot + Gemini, because banks have no open API.",
-        "status": "AI · Gemini",
+        "description": "Reads bank emails, parses transactions and categorizes them with AI, because banks have no open API. Java + Spring Boot backend on the Claude API, plus a React PWA with a public demo.",
+        "status": "AI · Claude",
         "stats": "Fintech"
       },
       "notifService": {

@@ -29,12 +29,13 @@ export const PROJECTS_CONFIG: ProjectConfig[] = [
     {
         id: 3,
         key: 'finMail',
-        tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Gmail API', 'Gemini'],
+        tags: ['Java', 'Spring Boot', 'React', 'PWA', 'Claude API'],
         isPrivate: false,
         color: 'blue',
         icon: 'code',
         slug: 'finmail',
         github: 'https://github.com/tovalh/finmail',
+        demo: 'https://finmail.toval.dev',
         thumb: '/thumbnails/finmail.svg'
     },
     {
